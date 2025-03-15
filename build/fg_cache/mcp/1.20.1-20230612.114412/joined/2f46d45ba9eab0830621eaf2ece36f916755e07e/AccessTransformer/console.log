@@ -1,0 +1,6 @@
+JVM:         /home/tefyer/.jdks/temurin-17.0.14/bin/java
+JVM Args:    
+Run Args:    "--inJar", "/home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/mcp/1.20.1-20230612.114412/joined/2f46d45ba9eab0830621eaf2ece36f916755e07e/rename/output.jar", "--outJar", "/home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/mcp/1.20.1-20230612.114412/joined/2f46d45ba9eab0830621eaf2ece36f916755e07e/AccessTransformer/output.jar", "--atFile", "/home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/src/main/resources/META-INF/accesstransformer.cfg", "--atFile", "/tmp/FG_ats_7155934430466003347.cfg"
+Classpath:   /home/tefyer/.mcreator/gradle/caches/forge_gradle/maven_downloader/net/minecraftforge/accesstransformers/8.2.1/accesstransformers-8.2.1-fatjar.jar
+Working Dir: /home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/mcp/1.20.1-20230612.114412/joined/2f46d45ba9eab0830621eaf2ece36f916755e07e/AccessTransformer
+Main Class:  net.minecraftforge.accesstransformer.TransformerProcessor

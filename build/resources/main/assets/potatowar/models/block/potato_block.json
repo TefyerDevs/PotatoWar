@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "potatowar:block/oddpoatoblock",
+    "up": "potatowar:block/oddpoatoblock",
+    "north": "potatowar:block/oddpoatoblock",
+    "east": "potatowar:block/oddpoatoblock",
+    "south": "potatowar:block/oddpoatoblock",
+    "west": "potatowar:block/oddpoatoblock",
+    "particle": "potatowar:block/oddpoatoblock"
+  },
+  "render_type": "solid"
+}

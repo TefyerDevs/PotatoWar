@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "potatowar:herobrines_forest",
+  "features": "potatowar:herobrine_tree_2",
+  "step": "vegetal_decoration"
+}

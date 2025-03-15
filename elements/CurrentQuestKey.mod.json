@@ -1,0 +1,12 @@
+{
+  "_fv": 73,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "Z",
+    "keyBindingName": "Current Quest",
+    "keyBindingCategoryKey": "ui",
+    "onKeyPressed": {
+      "name": "CurrentQuestKeyOnKeyPressed"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " a ",
+    "aba",
+    " a "
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:iron_ingot"
+    },
+    "b": {
+      "item": "potatowar:odd_potato_plant_stg_1"
+    }
+  },
+  "result": {
+    "item": "potatowar:blank_kit",
+    "count": 1
+  }
+}

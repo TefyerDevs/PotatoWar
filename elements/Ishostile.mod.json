@@ -1,0 +1,10 @@
+{
+  "_fv": 73,
+  "_type": "command",
+  "definition": {
+    "commandName": "ishostile",
+    "type": "STANDARD",
+    "permissionLevel": "No requirement",
+    "argsxml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"args_start\" deletable=\"false\" x=\"65\" y=\"81\"><next><block type=\"call_procedure\"><field name=\"procedure\">NegativePotatoRep</field></block></next></block></xml>"
+  }
+}

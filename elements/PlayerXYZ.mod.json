@@ -1,0 +1,7 @@
+{
+  "_fv": 73,
+  "_type": "procedure",
+  "definition": {
+    "procedurexml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><xml xmlns=\"https://developers.google.com/blockly/xml\"><block deletable=\"false\" type=\"event_trigger\" x=\"233\" y=\"139\"><field name=\"trigger\">player_ticks</field><next><block type=\"variables_set_number\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" has_entity=\"true\" is_player_var=\"true\"/><field name=\"VAR\">global:PlayerX</field><value name=\"VAL\"><block type=\"entity_pos_x\"><value name=\"entity\"><block type=\"entity_from_deps\"/></value></block></value><value name=\"entity\"><block type=\"entity_from_deps\"/></value><next><block type=\"variables_set_number\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" has_entity=\"true\" is_player_var=\"true\"/><field name=\"VAR\">global:PlayerY</field><value name=\"VAL\"><block type=\"entity_pos_y\"><value name=\"entity\"><block type=\"entity_from_deps\"/></value></block></value><value name=\"entity\"><block type=\"entity_from_deps\"/></value><next><block type=\"variables_set_number\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" has_entity=\"true\" is_player_var=\"true\"/><field name=\"VAR\">global:PlayerZ</field><value name=\"VAL\"><block type=\"entity_pos_y\"><value name=\"entity\"><block type=\"entity_from_deps\"/></value></block></value><value name=\"entity\"><block type=\"entity_from_deps\"/></value></block></next></block></next></block></next></block></xml>"
+  }
+}

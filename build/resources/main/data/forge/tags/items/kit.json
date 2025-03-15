@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "potatowar:scout_kit",
+    "potatowar:knight_kit",
+    "potatowar:fryer_kit",
+    "potatowar:army_kit",
+    "potatowar:milita_kit",
+    "potatowar:beserker_kit",
+    "potatowar:military_kit"
+  ]
+}

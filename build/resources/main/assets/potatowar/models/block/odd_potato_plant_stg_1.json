@@ -1,0 +1,8 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "potatowar:block/oddplant1",
+    "particle": "potatowar:block/oddplant1"
+  },
+  "render_type": "cutout"
+}

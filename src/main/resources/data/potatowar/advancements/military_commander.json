@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "potatowar:military_armor_helmet"
+    },
+    "title": {
+      "translate": "advancements.military_commander.title"
+    },
+    "description": {
+      "translate": "advancements.military_commander.descr"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "military_commander_0": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "parent": "potatowar:potato_war"
+}

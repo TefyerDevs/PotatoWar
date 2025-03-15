@@ -1,0 +1,9 @@
+JVM:         /home/tefyer/.jdks/temurin-17.0.14/bin/java
+JVM Args:    
+Run Args:    "--strip", "--input", "/home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/mcp/1.20.1-20230612.114412/joined/2f46d45ba9eab0830621eaf2ece36f916755e07e/AccessTransformer/output.jar", "--output", "/home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/mcp/1.20.1-20230612.114412/joined/2f46d45ba9eab0830621eaf2ece36f916755e07e/SideStripper/output.jar", "--data", "/home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/mcp/1.20.1-20230612.114412/joined/2f46d45ba9eab0830621eaf2ece36f916755e07e/SideStripper/string_data.sas"
+Classpath:   /home/tefyer/.mcreator/gradle/caches/forge_gradle/maven_downloader/net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7-fatjar.jar
+Working Dir: /home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/mcp/1.20.1-20230612.114412/joined/2f46d45ba9eab0830621eaf2ece36f916755e07e/SideStripper
+Main Class:  net.minecraftforge.mergetool.ConsoleMerger
+Input:  /home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/mcp/1.20.1-20230612.114412/joined/2f46d45ba9eab0830621eaf2ece36f916755e07e/AccessTransformer/output.jar
+Output: /home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/mcp/1.20.1-20230612.114412/joined/2f46d45ba9eab0830621eaf2ece36f916755e07e/SideStripper/output.jar
+Data:   /home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/mcp/1.20.1-20230612.114412/joined/2f46d45ba9eab0830621eaf2ece36f916755e07e/SideStripper/string_data.sas

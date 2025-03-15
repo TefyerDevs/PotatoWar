@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "bcb",
+    "ddd"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:copper_block"
+    },
+    "b": {
+      "tag": "minecraft:planks"
+    },
+    "c": {
+      "item": "potatowar:oddpotato_2"
+    },
+    "d": {
+      "tag": "forge:stone"
+    }
+  },
+  "result": {
+    "item": "potatowar:town_center",
+    "count": 1
+  }
+}

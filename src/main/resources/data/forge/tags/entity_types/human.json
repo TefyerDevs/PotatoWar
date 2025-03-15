@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "potatowar:human",
+    "potatowar:human_milita",
+    "potatowar:human_knight",
+    "potatowar:human_military",
+    "potatowar:human_scout",
+    "potatowar:beserker",
+    "potatowar:raid_leader",
+    "potatowar:scout_leader",
+    "creeper"
+  ]
+}

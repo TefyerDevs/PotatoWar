@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "potatowar:block/digitalmass",
+    "up": "potatowar:block/digitalmass",
+    "north": "potatowar:block/digitalmass",
+    "east": "potatowar:block/digitalmass",
+    "south": "potatowar:block/digitalmass",
+    "west": "potatowar:block/digitalmass",
+    "particle": "potatowar:block/digitalmass"
+  },
+  "render_type": "solid"
+}

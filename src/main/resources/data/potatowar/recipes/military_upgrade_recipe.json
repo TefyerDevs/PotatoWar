@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " a ",
+    "bcd",
+    " e "
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:iron_shovel"
+    },
+    "b": {
+      "item": "minecraft:iron_pickaxe"
+    },
+    "c": {
+      "item": "potatowar:blank_kit"
+    },
+    "d": {
+      "item": "minecraft:iron_sword"
+    },
+    "e": {
+      "item": "minecraft:iron_axe"
+    }
+  },
+  "result": {
+    "item": "potatowar:military_kit",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "potatowar:blocks/digital_block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "potatowar:digital_block"
+        }
+      ]
+    }
+  ]
+}

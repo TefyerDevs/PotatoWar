@@ -1,0 +1,23 @@
+{
+  "display": {
+    "background": "minecraft:textures/block/stone.png",
+    "icon": {
+      "item": "potatowar:odd_potato_plant_stg_1"
+    },
+    "title": {
+      "translate": "advancements.potato_war.title"
+    },
+    "description": {
+      "translate": "advancements.potato_war.descr"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "potato_war_0": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

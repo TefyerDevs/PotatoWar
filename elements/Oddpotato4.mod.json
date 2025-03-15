@@ -1,0 +1,109 @@
+{
+  "_fv": 73,
+  "_type": "plant",
+  "definition": {
+    "renderType": 13,
+    "texture": "odd4",
+    "textureBottom": "",
+    "customModelName": "Crop model",
+    "itemTexture": "",
+    "particleTexture": "",
+    "tintType": "No tint",
+    "isItemTinted": false,
+    "plantType": "normal",
+    "suspiciousStewEffect": "HASTE",
+    "suspiciousStewDuration": 200,
+    "secondaryTreeChance": 0.1,
+    "trees": [
+      null,
+      null
+    ],
+    "flowerTrees": [
+      null,
+      null
+    ],
+    "megaTrees": [
+      null,
+      null
+    ],
+    "growapableSpawnType": "Crop",
+    "growapableMaxHeight": 3,
+    "customBoundingBox": true,
+    "disableOffset": false,
+    "boundingBoxes": [
+      {
+        "mx": 16.0,
+        "my": 0.0,
+        "mz": 16.0,
+        "Mx": 16.0,
+        "My": 8.0,
+        "Mz": 16.0,
+        "subtract": false
+      }
+    ],
+    "name": "Odd Potato",
+    "specialInformation": {
+      "fixedValue": []
+    },
+    "creativeTabs": [],
+    "hardness": 0.0,
+    "resistance": 0.0,
+    "luminance": 0,
+    "unbreakable": false,
+    "isSolid": false,
+    "isWaterloggable": false,
+    "isCustomSoundType": false,
+    "soundOnStep": {
+      "value": "CROP"
+    },
+    "breakSound": {
+      "value": ""
+    },
+    "stepSound": {
+      "value": ""
+    },
+    "placeSound": {
+      "value": ""
+    },
+    "hitSound": {
+      "value": ""
+    },
+    "fallSound": {
+      "value": ""
+    },
+    "useLootTableForDrops": true,
+    "customDrop": {
+      "value": ""
+    },
+    "dropAmount": 1,
+    "forceTicking": true,
+    "emissiveRendering": false,
+    "hasTileEntity": false,
+    "isReplaceable": false,
+    "colorOnMap": "DEFAULT",
+    "creativePickItem": {
+      "value": ""
+    },
+    "offsetType": "NONE",
+    "aiPathNodeType": "DEFAULT",
+    "flammability": 100,
+    "fireSpreadSpeed": 60,
+    "jumpFactor": 1.0,
+    "speedFactor": 1.0,
+    "canBePlacedOn": [
+      {
+        "value": "Blocks.FARMLAND"
+      }
+    ],
+    "isBonemealable": true,
+    "frequencyOnChunks": 5,
+    "generateFeature": false,
+    "restrictionBiomes": [],
+    "generationType": "Flower",
+    "patchSize": 64,
+    "generateAtAnyHeight": false,
+    "onRightClicked": {
+      "name": "Oddpotato4PlantRightClicked"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "potatowar:overgrown_island",
+  "features": "potatowar:mosslump",
+  "step": "local_modifications"
+}

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "potatowar:herobrines_forest",
+  "features": "potatowar:redstone_torch",
+  "step": "vegetal_decoration"
+}

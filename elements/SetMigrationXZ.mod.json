@@ -1,0 +1,10 @@
+{
+  "_fv": 73,
+  "_type": "command",
+  "definition": {
+    "commandName": "SetMigration",
+    "type": "STANDARD",
+    "permissionLevel": "2",
+    "argsxml": "<xml xmlns=\"https://developers.google.com/blockly/xml\"><block type=\"args_start\" deletable=\"false\" x=\"40\" y=\"40\"><next><block type=\"number_default\"><field name=\"name\">MigrationX</field><statement name=\"args\"><block type=\"call_procedure\"><field name=\"procedure\">SetMigration</field><next><block type=\"number_default\"><field name=\"name\">MigrationZ</field><statement name=\"args\"><block type=\"call_procedure\"><field name=\"procedure\">SetMigrationZ</field></block></statement></block></next></block></statement></block></next></block></xml>"
+  }
+}

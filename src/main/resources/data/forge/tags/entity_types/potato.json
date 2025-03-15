@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "potatowar:potato_man",
+    "potatowar:potato_milita",
+    "potatowar:potato_knight",
+    "potatowar:potato_military",
+    "potatowar:potato_scout",
+    "potatowar:military_trainer",
+    "potatowar:fried_potato_man",
+    "potatowar:potato_archer",
+    "iron_golem"
+  ]
+}

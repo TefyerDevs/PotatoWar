@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "potatowar:block/digital_world_portal_ew"
+    },
+    "axis=x": {
+      "model": "potatowar:block/digital_world_portal_ns"
+    }
+  }
+}
