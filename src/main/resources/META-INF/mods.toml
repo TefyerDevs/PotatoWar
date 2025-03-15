@@ -1,14 +1,15 @@
 modLoader="javafml"
 loaderVersion="[47,)"
-license="Academic Free License v3.0"
+license="GPL v3.0 License"
 
 [[mods]]
 modId="potatowar"
-version="1.0.0"
+version="0.0.1"
 displayName="PotatoWar"
-displayURL="https://mcreator.net"
-credits="Created using mod maker MCreator - https://mcreator.net/about"
-authors="bt_sn, MCreator"
+description = "A mod that adds war to potatos."
+displayURL="https://github.com/TefyerDevs/PotatoWar"
+credits="Mr Door for the original mod. Minecraft Forge for allowing me to mod. Chatgpt for allowing me to do thing."
+authors="Tefyerdevs"
 
 # Start of user code block mod configuration
 # End of user code block mod configuration

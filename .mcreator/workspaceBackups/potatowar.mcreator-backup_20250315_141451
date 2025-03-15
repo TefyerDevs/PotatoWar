@@ -6407,7 +6407,7 @@
     "dependants": [],
     "mcreatorDependencies": [],
     "currentGenerator": "forge-1.20.1",
-    "modElementsPackage": "net.mcreator.potatowar",
+    "modElementsPackage": "net.tefyer.potatowar",
     "lockBaseModFiles": false
   },
   "mcreatorVersion": 202300452316

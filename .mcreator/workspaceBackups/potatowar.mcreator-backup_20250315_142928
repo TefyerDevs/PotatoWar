@@ -6010,7 +6010,7 @@
     "dependants": [],
     "mcreatorDependencies": [],
     "currentGenerator": "forge-1.20.1",
-    "modElementsPackage": "net.mcreator.potatowar"
+    "modElementsPackage": "net.tefyer.potatowar"
   },
   "mcreatorVersion": 202400452410
 }
