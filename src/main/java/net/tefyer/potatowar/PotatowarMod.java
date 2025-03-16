@@ -1,5 +1,6 @@
 package net.tefyer.potatowar;
 
+import net.tefyer.potatowar.init.*;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -16,15 +17,6 @@ import net.minecraftforge.common.MinecraftForge;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.FriendlyByteBuf;
-
-import net.tefyer.potatowar.init.PotatowarModTabs;
-import net.tefyer.potatowar.init.PotatowarModSounds;
-import net.tefyer.potatowar.init.PotatowarModPaintings;
-import net.tefyer.potatowar.init.PotatowarModMobEffects;
-import net.tefyer.potatowar.init.PotatowarModMenus;
-import net.tefyer.potatowar.init.PotatowarModItems;
-import net.tefyer.potatowar.init.PotatowarModEntities;
-import net.tefyer.potatowar.init.PotatowarModBlocks;
 
 import java.util.function.Supplier;
 import java.util.function.Function;
@@ -50,6 +42,8 @@ public class PotatowarMod {
 		PotatowarModBlocks.REGISTRY.register(bus);
 
 		PotatowarModItems.REGISTRY.register(bus);
+		PotatowarModItemGroup.REGISTRY.register(bus);
+
 		PotatowarModEntities.REGISTRY.register(bus);
 
 		PotatowarModTabs.REGISTRY.register(bus);
@@ -60,8 +54,6 @@ public class PotatowarMod {
 
 		PotatowarModMenus.REGISTRY.register(bus);
 
-		// Start of user code block mod init
-		// End of user code block mod init
 	}
 
 	// Start of user code block mod methods

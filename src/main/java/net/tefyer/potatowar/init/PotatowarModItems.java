@@ -4,6 +4,9 @@
  */
 package net.tefyer.potatowar.init;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.CreativeModeTab;
+import net.tefyer.potatowar.deferredregister.ItemDeferredRegister;
 import net.tefyer.potatowar.item.*;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.registries.RegistryObject;
@@ -18,18 +21,16 @@ import net.minecraft.world.item.BlockItem;
 import net.tefyer.potatowar.PotatowarMod;
 
 public class PotatowarModItems {
-	public static final DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, PotatowarMod.MODID);
-
-
+	public static final ItemDeferredRegister REGISTRY = new  ItemDeferredRegister(PotatowarMod.MODID);
 	// KITS
-	public static final RegistryObject<Item> BESERKER_KIT = REGISTRY.register("beserker_kit",()->  new KitItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> BLANK_KIT = REGISTRY.register("blank_kit",()->  new KitItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> MILITARY_KIT = REGISTRY.register("military_kit",()->  new KitItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> SCOUT_KIT = REGISTRY.register("scout_kit",()->  new KitItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> KNIGHT_KIT = REGISTRY.register("knight_kit",()->  new KitItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> ARMY_KIT = REGISTRY.register("army_kit",()->  new KitItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> FRYER_KIT = REGISTRY.register("fryer_kit",()->  new KitItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> MILITA_KIT = REGISTRY.register("milita_kit",()-> new KitItem.Builder().setRarity(Rarity.COMMON).build());
+	public static final RegistryObject<Item> BLANK_KIT = REGISTRY.registerKit("blank_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
+	public static final RegistryObject<Item> BESERKER_KIT = REGISTRY.registerKit("beserker_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
+	public static final RegistryObject<Item> MILITARY_KIT = REGISTRY.registerKit("military_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
+	public static final RegistryObject<Item> SCOUT_KIT = REGISTRY.registerKit("scout_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
+	public static final RegistryObject<Item> KNIGHT_KIT = REGISTRY.registerKit("knight_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
+	public static final RegistryObject<Item> ARMY_KIT = REGISTRY.registerKit("army_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
+	public static final RegistryObject<Item> FRYER_KIT = REGISTRY.registerKit("fryer_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
+	public static final RegistryObject<Item> MILITA_KIT = REGISTRY.registerKit("milita_kit",()-> new NormalItem.Builder().setRarity(Rarity.COMMON).build());
 
 	// SPAWN EGGS
 	public static final RegistryObject<Item> POTATO_MAN_SPAWN_EGG = REGISTRY.register("potato_man_spawn_egg", () -> new ForgeSpawnEggItem(PotatowarModEntities.POTATO_MAN, -256, -26368, new Item.Properties()));
