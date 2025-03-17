@@ -4,7 +4,7 @@ license="GPL v3.0 License"
 
 [[mods]]
 modId="potatowar"
-version="0.0.1"
+version="0.0.2"
 displayName="PotatoWar"
 description = "A mod that adds war to potatos."
 displayURL="https://github.com/TefyerDevs/PotatoWar"
