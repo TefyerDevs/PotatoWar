@@ -42,7 +42,6 @@ public class PotatowarMod {
 		PotatowarModBlocks.REGISTRY.register(bus);
 
 		PotatowarModItems.REGISTRY.register(bus);
-		PotatowarModItemGroup.REGISTRY.register(bus);
 
 		PotatowarModEntities.REGISTRY.register(bus);
 

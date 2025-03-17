@@ -18,6 +18,6 @@ public class GlitchRenderer extends HumanoidMobRenderer<GlitchEntity, HumanoidMo
 
 	@Override
 	public ResourceLocation getTextureLocation(GlitchEntity entity) {
-		return new ResourceLocation("potatowar:textures/entities/glitch-on-planetminecraft-com.png");
+		return new ResourceLocation("potatowar:textures/entities/glitch_1.png");
 	}
 }

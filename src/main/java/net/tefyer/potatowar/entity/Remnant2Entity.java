@@ -30,9 +30,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 
-import net.tefyer.potatowar.procedures.CanSeeSkyProcedure;
 import net.tefyer.potatowar.init.PotatowarModItems;
 import net.tefyer.potatowar.init.PotatowarModEntities;
+import net.tefyer.potatowar.procedures.EntityUtils;
 
 public class Remnant2Entity extends Monster {
 	public Remnant2Entity(PlayMessages.SpawnEntity packet, Level world) {
@@ -98,7 +98,7 @@ public class Remnant2Entity extends Monster {
 			int x = pos.getX();
 			int y = pos.getY();
 			int z = pos.getZ();
-			return CanSeeSkyProcedure.execute(world, x, y, z);
+			return EntityUtils.canSeSky(world, x, y, z);
 		});
 	}
 

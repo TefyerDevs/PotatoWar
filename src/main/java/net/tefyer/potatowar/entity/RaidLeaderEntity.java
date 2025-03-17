@@ -1,6 +1,15 @@
 
 package net.tefyer.potatowar.entity;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
@@ -19,13 +28,6 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.sounds.SoundEvent;
@@ -34,10 +36,11 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 
-import net.tefyer.potatowar.procedures.RaidLeaderOnInitialEntitySpawnProcedure;
 import net.tefyer.potatowar.init.PotatowarModEntities;
 
 import javax.annotation.Nullable;
+import java.util.Comparator;
+import java.util.List;
 
 public class RaidLeaderEntity extends Monster implements RangedAttackMob {
 	public RaidLeaderEntity(PlayMessages.SpawnEntity packet, Level world) {
@@ -105,10 +108,38 @@ public class RaidLeaderEntity extends Monster implements RangedAttackMob {
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		RaidLeaderOnInitialEntitySpawnProcedure.execute(world, this.getX(), this.getY(), this.getZ(), this);
+		finSpawn(world, this.getX(), this.getY(), this.getZ(), this);
 		return retval;
 	}
 
+	public static void finSpawn(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (entity == null)
+			return;
+		double RaiderCount = 0;
+		RaiderCount = 0;
+		{
+			final Vec3 _center = new Vec3(x, y, z);
+			List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(5 / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
+			for (Entity entityiterator : _entfound) {
+				if (entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge:human"))) && !entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("potatowar:civilian")))) {
+					entityiterator.getPersistentData().putBoolean("potatowar:InRaidPosition", false);
+					entityiterator.getPersistentData().putBoolean("potatowar:Raider", true);
+					entityiterator.getPersistentData().putBoolean("potatowar:OutsideRaidPosition", true);
+					if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide())
+						_entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 600, 1));
+					RaiderCount = RaiderCount + 1;
+				}
+			}
+		}
+		entity.getPersistentData().putBoolean("potatowar:InRaidPosition", false);
+		entity.getPersistentData().putBoolean("potatowar:Raider", true);
+		entity.getPersistentData().putBoolean("potatowar:OutsideRaidPosition", true);
+		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
+			_entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 600, 1));
+		RaiderCount = RaiderCount + 1;
+		if (!world.isClientSide() && world.getServer() != null)
+			world.getServer().getPlayerList().broadcastSystemMessage(Component.literal(("Raider count: " + RaiderCount)), false);
+	}
 	@Override
 	public void performRangedAttack(LivingEntity target, float flval) {
 		Arrow entityarrow = new Arrow(this.level(), this);

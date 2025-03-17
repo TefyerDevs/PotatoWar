@@ -1,18 +1,18 @@
 Java Launcher: /home/tefyer/.jdks/temurin-17.0.14/bin/java
-Arguments: '--clean, /home/tefyer/.mcreator/gradle/caches/forge_gradle/mcp_repo/net/minecraft/joined/1.20.1-20230612.114412/joined-1.20.1-20230612.114412-srg.jar, --output, /home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-binpatched.jar, --apply, /home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-binpatches.lzma'
+Arguments: '--clean, /home/tefyer/.gradle/caches/forge_gradle/mcp_repo/net/minecraft/joined/1.20.1-20230612.114412/joined-1.20.1-20230612.114412-srg.jar, --output, /home/tefyer/coding-projects/java-projects/PotatoWar/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-binpatched.jar, --apply, /home/tefyer/coding-projects/java-projects/PotatoWar/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-binpatches.lzma'
 Classpath:
- - /home/tefyer/.mcreator/gradle/caches/forge_gradle/maven_downloader/net/minecraftforge/binarypatcher/1.1.1/binarypatcher-1.1.1-fatjar.jar
-Working directory: /home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/_applyBinpatches_2
+ - /home/tefyer/.gradle/caches/forge_gradle/maven_downloader/net/minecraftforge/binarypatcher/1.1.1/binarypatcher-1.1.1-fatjar.jar
+Working directory: /home/tefyer/coding-projects/java-projects/PotatoWar/build/_applyBinpatches_2
 Main class: net.minecraftforge.binarypatcher.ConsoleTool
 ====================================
 Applying: 
-  Clean:     /home/tefyer/.mcreator/gradle/caches/forge_gradle/mcp_repo/net/minecraft/joined/1.20.1-20230612.114412/joined-1.20.1-20230612.114412-srg.jar
-  Output:    /home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-binpatched.jar
+  Clean:     /home/tefyer/.gradle/caches/forge_gradle/mcp_repo/net/minecraft/joined/1.20.1-20230612.114412/joined-1.20.1-20230612.114412-srg.jar
+  Output:    /home/tefyer/coding-projects/java-projects/PotatoWar/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-binpatched.jar
   KeepData:  false
   Unpatched: false
   Pack200:   false
   Legacy:    false
-Loading patches file: /home/tefyer/coding-projects/java-projects/PotatoWarWorkspace(Mcreator)/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-binpatches.lzma
+Loading patches file: /home/tefyer/coding-projects/java-projects/PotatoWar/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.0/forge-1.20.1-47.3.0-binpatches.lzma
   Reading patch com.mojang.blaze3d.pipeline.RenderTarget.binpatch
     Checksum: 151eb55a Exists: true
   Reading patch com.mojang.blaze3d.platform.GlStateManager$BlendState.binpatch
@@ -2843,7 +2843,7 @@ Loading patches file: /home/tefyer/coding-projects/java-projects/PotatoWarWorksp
     Checksum: 5054d5d6 Exists: true
   Reading patch net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider.binpatch
     Checksum: 33daf11e Exists: true
-Processing: /home/tefyer/.mcreator/gradle/caches/forge_gradle/mcp_repo/net/minecraft/joined/1.20.1-20230612.114412/joined-1.20.1-20230612.114412-srg.jar
+Processing: /home/tefyer/.gradle/caches/forge_gradle/mcp_repo/net/minecraft/joined/1.20.1-20230612.114412/joined-1.20.1-20230612.114412-srg.jar
   Patching com/mojang/blaze3d/pipeline/RenderTarget 1/1
   Patching com/mojang/blaze3d/platform/GlStateManager$BlendState 1/1
   Patching com/mojang/blaze3d/platform/GlStateManager$BooleanState 1/1

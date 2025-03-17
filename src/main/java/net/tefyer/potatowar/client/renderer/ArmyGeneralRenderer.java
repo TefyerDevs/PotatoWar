@@ -18,6 +18,6 @@ public class ArmyGeneralRenderer extends HumanoidMobRenderer<ArmyGeneralEntity, 
 
 	@Override
 	public ResourceLocation getTextureLocation(ArmyGeneralEntity entity) {
-		return new ResourceLocation("potatowar:textures/entities/classic-steve-on-planetminecraft-com.png");
+		return new ResourceLocation("potatowar:textures/entities/steve.png");
 	}
 }

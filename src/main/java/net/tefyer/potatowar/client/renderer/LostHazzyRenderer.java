@@ -18,6 +18,6 @@ public class LostHazzyRenderer extends HumanoidMobRenderer<LostHazzyEntity, Huma
 
 	@Override
 	public ResourceLocation getTextureLocation(LostHazzyEntity entity) {
-		return new ResourceLocation("potatowar:textures/entities/428c5d913c53eec7.png");
+		return new ResourceLocation("potatowar:textures/entities/lost_hazzy.png");
 	}
 }

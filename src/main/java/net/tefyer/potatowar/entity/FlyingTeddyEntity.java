@@ -1,6 +1,11 @@
 
 package net.tefyer.potatowar.entity;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -17,7 +22,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 
-import net.tefyer.potatowar.procedures.FlyingTeddyProjectileHitsBlockProcedure;
 import net.tefyer.potatowar.init.PotatowarModItems;
 import net.tefyer.potatowar.init.PotatowarModEntities;
 
@@ -66,7 +70,16 @@ public class FlyingTeddyEntity extends AbstractArrow implements ItemSupplier {
 	@Override
 	public void onHitBlock(BlockHitResult blockHitResult) {
 		super.onHitBlock(blockHitResult);
-		FlyingTeddyProjectileHitsBlockProcedure.execute(this.level(), blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY(), blockHitResult.getBlockPos().getZ());
+		hitWithBlock(this.level(), blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY(), blockHitResult.getBlockPos().getZ());
+	}
+
+	public static void hitWithBlock(LevelAccessor world, double x, double y, double z) {
+		if (world instanceof ServerLevel _level) {
+			Entity entityToSpawn = PotatowarModEntities.REMNANT_2.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+			if (entityToSpawn != null) {
+				entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
+			}
+		}
 	}
 
 	@Override

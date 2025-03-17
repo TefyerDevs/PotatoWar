@@ -18,6 +18,6 @@ public class HumanScoutRenderer extends HumanoidMobRenderer<HumanScoutEntity, Hu
 
 	@Override
 	public ResourceLocation getTextureLocation(HumanScoutEntity entity) {
-		return new ResourceLocation("potatowar:textures/entities/classic-steve-on-planetminecraft-com.png");
+		return new ResourceLocation("potatowar:textures/entities/steve.png");
 	}
 }

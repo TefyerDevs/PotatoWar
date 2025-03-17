@@ -1,6 +1,8 @@
 
 package net.tefyer.potatowar.entity;
 
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
@@ -32,7 +34,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 
-import net.tefyer.potatowar.procedures.FishEntityIsHurtProcedure;
+import net.tefyer.potatowar.network.PotatowarModVariables;
 import net.tefyer.potatowar.init.PotatowarModEntities;
 
 public class FishEntity extends Monster {
@@ -107,7 +109,7 @@ public class FishEntity extends Monster {
 		Entity sourceentity = damagesource.getEntity();
 		Entity immediatesourceentity = damagesource.getDirectEntity();
 
-		FishEntityIsHurtProcedure.execute(entity);
+		isHurt(entity);
 		if (damagesource.is(DamageTypes.IN_FIRE))
 			return false;
 		if (damagesource.getDirectEntity() instanceof ThrownPotion || damagesource.getDirectEntity() instanceof AreaEffectCloud)
@@ -123,6 +125,25 @@ public class FishEntity extends Monster {
 		if (damagesource.is(DamageTypes.WITHER) || damagesource.is(DamageTypes.WITHER_SKULL))
 			return false;
 		return super.hurt(damagesource, amount);
+	}
+
+	public static void isHurt(Entity entity) {
+		if (entity == null)
+			return;
+		double Attack = 0;
+		Attack = Mth.nextInt(RandomSource.create(), 1, 1);
+		if (Attack == 1) {
+			{
+				Entity _ent = entity;
+				_ent.teleportTo(((entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PotatowarModVariables.PlayerVariables())).PlayerX),
+						((entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PotatowarModVariables.PlayerVariables())).PlayerY + 20),
+						((entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PotatowarModVariables.PlayerVariables())).PlayerZ));
+				if (_ent instanceof ServerPlayer _serverPlayer)
+					_serverPlayer.connection.teleport(((entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PotatowarModVariables.PlayerVariables())).PlayerX),
+							((entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PotatowarModVariables.PlayerVariables())).PlayerY + 20),
+							((entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PotatowarModVariables.PlayerVariables())).PlayerZ), _ent.getYRot(), _ent.getXRot());
+			}
+		}
 	}
 
 	@Override

@@ -18,6 +18,6 @@ public class RaidLeaderRenderer extends HumanoidMobRenderer<RaidLeaderEntity, Hu
 
 	@Override
 	public ResourceLocation getTextureLocation(RaidLeaderEntity entity) {
-		return new ResourceLocation("potatowar:textures/entities/classic-steve-on-planetminecraft-com.png");
+		return new ResourceLocation("potatowar:textures/entities/steve.png");
 	}
 }

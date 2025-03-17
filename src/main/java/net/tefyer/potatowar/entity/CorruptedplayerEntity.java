@@ -1,6 +1,20 @@
 
 package net.tefyer.potatowar.entity;
 
+import net.minecraft.commands.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
@@ -34,13 +48,12 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 
-import net.tefyer.potatowar.procedures.CorruptedplayerOnInitialEntitySpawnProcedure;
-import net.tefyer.potatowar.procedures.CorruptedplayerOnEntityTickUpdateProcedure;
-import net.tefyer.potatowar.procedures.CorruptedplayerEntityIsHurtProcedure;
-import net.tefyer.potatowar.procedures.CorruptedplayerEntityDiesProcedure;
+import net.tefyer.potatowar.PotatowarMod;
+import net.tefyer.potatowar.network.PotatowarModVariables;
 import net.tefyer.potatowar.init.PotatowarModEntities;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class CorruptedplayerEntity extends Monster {
 	private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(), ServerBossEvent.BossBarColor.WHITE, ServerBossEvent.BossBarOverlay.PROGRESS);
@@ -116,27 +129,120 @@ public class CorruptedplayerEntity extends Monster {
 		Entity sourceentity = damagesource.getEntity();
 		Entity immediatesourceentity = damagesource.getDirectEntity();
 
-		CorruptedplayerEntityIsHurtProcedure.execute(world, y, entity);
+		takeDamage(world, y, entity);
 		return super.hurt(damagesource, amount);
+	}
+
+	public static void takeDamage(LevelAccessor world, double y, Entity entity) {
+		if (entity == null)
+			return;
+		double NewX;
+		double NewZ;
+		if (Mth.nextInt(RandomSource.create(), 1, 2) == 2) {
+			if (Mth.nextInt(RandomSource.create(), 1, 2) == 2) {
+				NewX = entity.getX() + Mth.nextInt(RandomSource.create(), 1, 3);
+			} else {
+				NewX = entity.getX() - Mth.nextInt(RandomSource.create(), 1, 3);
+			}
+			if (Mth.nextInt(RandomSource.create(), 1, 2) == 2) {
+				NewZ = entity.getZ() + Mth.nextInt(RandomSource.create(), 1, 3);
+			} else {
+				NewZ = entity.getZ() - Mth.nextInt(RandomSource.create(), 1, 3);
+			}
+			if (!((world.getBlockState(BlockPos.containing(NewX, y, NewZ))).getBlock() == Blocks.AIR)) {
+				{
+                    entity.teleportTo(NewX, y, NewZ);
+					if (entity instanceof ServerPlayer _serverPlayer)
+						_serverPlayer.connection.teleport(NewX, y, NewZ, entity.getYRot(), entity.getXRot());
+				}
+			}
+			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
+				_entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 80, 1, false, false));
+		}
 	}
 
 	@Override
 	public void die(DamageSource source) {
 		super.die(source);
-		CorruptedplayerEntityDiesProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ());
+		if (this.level() instanceof ServerLevel _level)
+			_level.getServer().getCommands()
+					.performPrefixedCommand(
+							new CommandSourceStack(CommandSource.NULL,
+									new Vec3(this.getX(),this.getY(), this.getX()), Vec2.ZERO,
+									_level, 4, "",
+									Component.literal(""),
+									_level.getServer(), null).withSuppressedOutput(), "stopsound @p");
 	}
 
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		CorruptedplayerOnInitialEntitySpawnProcedure.execute(world, this.getX(), this.getY(), this.getZ(), this);
+		spawn(world, this.getX(), this.getY(), this.getZ(), this);
 		return retval;
+	}
+
+	public static void spawn(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (entity == null)
+			return;
+		if (world instanceof Level _level) {
+			if (!_level.isClientSide()) {
+				_level.playSound(null, BlockPos.containing(x, y, z), Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:crtpplayerbossmusic"))), SoundSource.MUSIC, 1, 1);
+			} else {
+				_level.playLocalSound(x, y, z, Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:crtpplayerbossmusic"))), SoundSource.MUSIC, 1, 1, false);
+			}
+		}
+		{
+			boolean _setval = true;
+			entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+				capability.BossFight1 = _setval;
+				capability.syncPlayerVariables(entity);
+			});
+		}
+		PotatowarMod.queueServerWork(5680, () -> {
+			{
+				boolean _setval = false;
+				entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+					capability.BossFight1 = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		});
 	}
 
 	@Override
 	public void baseTick() {
 		super.baseTick();
-		CorruptedplayerOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+		tickEntity(this.level(), this.getX(), this.getY(), this.getZ(), this);
+	}
+
+	public static void tickEntity(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (entity == null)
+			return;
+		if ((entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PotatowarModVariables.PlayerVariables())).BossFight1 == true) {
+			{
+				boolean _setval = false;
+				entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+					capability.BossFight1 = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			if (world instanceof Level _level) {
+				if (!_level.isClientSide()) {
+					_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:bossmusic1")), SoundSource.NEUTRAL, 1, 1);
+				} else {
+					_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:bossmusic1")), SoundSource.NEUTRAL, 1, 1, false);
+				}
+			}
+			PotatowarMod.queueServerWork(5680, () -> {
+				{
+					boolean _setval = true;
+					entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+						capability.BossFight1 = _setval;
+						capability.syncPlayerVariables(entity);
+					});
+				}
+			});
+		}
 	}
 
 	@Override

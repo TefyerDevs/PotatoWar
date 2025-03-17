@@ -1,6 +1,17 @@
 
 package net.tefyer.potatowar.entity;
 
+import net.minecraft.commands.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
@@ -37,10 +48,8 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 
-import net.tefyer.potatowar.procedures.Prototype1OnInitialEntitySpawnProcedure;
-import net.tefyer.potatowar.procedures.Prototype1OnEntityTickUpdateProcedure;
-import net.tefyer.potatowar.procedures.Prototype1EntityIsHurtProcedure;
-import net.tefyer.potatowar.procedures.Prototype1EntityDiesProcedure;
+import net.tefyer.potatowar.PotatowarMod;
+import net.tefyer.potatowar.network.PotatowarModVariables;
 import net.tefyer.potatowar.init.PotatowarModItems;
 import net.tefyer.potatowar.init.PotatowarModEntities;
 
@@ -125,29 +134,127 @@ public class Prototype1Entity extends Monster {
 		Entity sourceentity = damagesource.getEntity();
 		Entity immediatesourceentity = damagesource.getDirectEntity();
 
-		Prototype1EntityIsHurtProcedure.execute(world, x, y, z, entity);
+		hurt(world, x, y, z, entity);
 		if (damagesource.getDirectEntity() instanceof ThrownPotion || damagesource.getDirectEntity() instanceof AreaEffectCloud)
 			return false;
 		return super.hurt(damagesource, amount);
+	}
+	public static void hurt(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (entity == null)
+			return;
+		if (!entity.getPersistentData().getBoolean("potatowar:SheildsDeployed") && (entity instanceof LivingEntity _livEnt ? _livEnt.getHealth() : -1) < 75) {
+			entity.getPersistentData().putBoolean("potatowar:SheildsDeployed", true);
+			if (world instanceof ServerLevel _level) {
+				Entity entityToSpawn = PotatowarModEntities.PROTO_DEFENDER.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+				if (entityToSpawn != null) {
+					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
+				}
+			}
+			if (world instanceof ServerLevel _level) {
+				Entity entityToSpawn = PotatowarModEntities.PROTO_DEFENDER.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+				if (entityToSpawn != null) {
+					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
+				}
+			}
+			if (!world.isClientSide() && world.getServer() != null)
+				world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("You thought it was going to be this easy to defeat me?"), false);
+		}
 	}
 
 	@Override
 	public void die(DamageSource source) {
 		super.die(source);
-		Prototype1EntityDiesProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+		die(this.level(), this.getX(), this.getY(), this.getZ(), this);
+	}
+	public static void die(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (entity == null)
+			return;
+		if (!world.isClientSide() && world.getServer() != null)
+			world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("YOU MOTHER FU-"), false);
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "stopsound @a");
+		{
+			boolean _setval = true;
+			entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+				capability.BossFight1 = _setval;
+				capability.syncPlayerVariables(entity);
+			});
+		}
 	}
 
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		Prototype1OnInitialEntitySpawnProcedure.execute(world, this.getX(), this.getY(), this.getZ(), this);
+		finSpawn(world, this.getX(), this.getY(), this.getZ(), this);
 		return retval;
+	}
+	public static void finSpawn(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (entity == null)
+			return;
+		entity.getPersistentData().putBoolean("potatowar:SheildsDeployed", false);
+		if (world instanceof Level _level) {
+			if (!_level.isClientSide()) {
+				_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:boss4")), SoundSource.MUSIC, 1, 1);
+			} else {
+				_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:boss4")), SoundSource.MUSIC, 1, 1, false);
+			}
+		}
+		{
+			boolean _setval = true;
+			entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+				capability.BossFight1 = _setval;
+				capability.syncPlayerVariables(entity);
+			});
+		}
+		PotatowarMod.queueServerWork(3240, () -> {
+			{
+				boolean _setval = false;
+				entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+					capability.BossFight1 = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		});
 	}
 
 	@Override
 	public void baseTick() {
 		super.baseTick();
-		Prototype1OnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+		tick(this.level(), this.getX(), this.getY(), this.getZ(), this);
+	}
+
+	public static void tick(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (entity == null)
+			return;
+		if (1 <= PotatowarModVariables.WorldVariables.get(world).BossShield) {
+			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
+				_entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 40, 5, false, false));
+		}
+		if ((entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PotatowarModVariables.PlayerVariables())).BossFight1) {
+			{
+				boolean _setval = false;
+				entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+					capability.BossFight1 = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			if (world instanceof Level _level) {
+				if (!_level.isClientSide()) {
+					_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:boss4")), SoundSource.NEUTRAL, 1, 1);
+				} else {
+					_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:boss4")), SoundSource.NEUTRAL, 1, 1, false);
+				}
+			}
+			PotatowarMod.queueServerWork(3400, () -> {
+				{
+					boolean _setval = true;
+					entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+						capability.BossFight1 = _setval;
+						capability.syncPlayerVariables(entity);
+					});
+				}
+			});
+		}
 	}
 
 	@Override

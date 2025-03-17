@@ -1,6 +1,10 @@
 
 package net.tefyer.potatowar.entity;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
@@ -19,12 +23,6 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.server.level.ServerPlayer;
@@ -32,7 +30,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 
-import net.tefyer.potatowar.procedures.HazzycloneThisEntityKillsAnotherOneProcedure;
 import net.tefyer.potatowar.init.PotatowarModEntities;
 
 public class HazzycloneEntity extends Monster {
@@ -106,7 +103,16 @@ public class HazzycloneEntity extends Monster {
 	@Override
 	public void awardKillScore(Entity entity, int score, DamageSource damageSource) {
 		super.awardKillScore(entity, score, damageSource);
-		HazzycloneThisEntityKillsAnotherOneProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ());
+		awardKill(this.level(), this.getX(), this.getY(), this.getZ());
+	}
+
+	public static void awardKill(LevelAccessor world, double x, double y, double z) {
+		if (world instanceof ServerLevel _level) {
+			Entity entityToSpawn = PotatowarModEntities.HAZZYCLONE.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+			if (entityToSpawn != null) {
+				entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
+			}
+		}
 	}
 
 	public static void init() {

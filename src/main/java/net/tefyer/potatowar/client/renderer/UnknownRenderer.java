@@ -18,6 +18,6 @@ public class UnknownRenderer extends HumanoidMobRenderer<UnknownEntity, Humanoid
 
 	@Override
 	public ResourceLocation getTextureLocation(UnknownEntity entity) {
-		return new ResourceLocation("potatowar:textures/entities/speednintendo-s-protogen-on-planetminecraft-com.png");
+		return new ResourceLocation("potatowar:textures/entities/protogen.png");
 	}
 }

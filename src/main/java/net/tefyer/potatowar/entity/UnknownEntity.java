@@ -1,6 +1,12 @@
 
 package net.tefyer.potatowar.entity;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
@@ -15,12 +21,6 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.sounds.SoundEvent;
@@ -30,7 +30,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 
-import net.tefyer.potatowar.procedures.UnknownEntityDiesProcedure;
 import net.tefyer.potatowar.init.PotatowarModEntities;
 
 public class UnknownEntity extends Monster {
@@ -102,32 +101,35 @@ public class UnknownEntity extends Monster {
 		Entity sourceentity = damagesource.getEntity();
 		Entity immediatesourceentity = damagesource.getDirectEntity();
 
-		UnknownEntityDiesProcedure.execute(world, x, y, z, entity, sourceentity);
-		if (damagesource.is(DamageTypes.IN_FIRE))
-			return false;
-		if (damagesource.getDirectEntity() instanceof AbstractArrow)
-			return false;
-		if (damagesource.getDirectEntity() instanceof ThrownPotion || damagesource.getDirectEntity() instanceof AreaEffectCloud)
-			return false;
-		if (damagesource.is(DamageTypes.FALL))
-			return false;
-		if (damagesource.is(DamageTypes.CACTUS))
-			return false;
-		if (damagesource.is(DamageTypes.DROWN))
-			return false;
-		if (damagesource.is(DamageTypes.LIGHTNING_BOLT))
-			return false;
-		if (damagesource.is(DamageTypes.EXPLOSION) || damagesource.is(DamageTypes.PLAYER_EXPLOSION))
-			return false;
-		if (damagesource.is(DamageTypes.TRIDENT))
-			return false;
-		if (damagesource.is(DamageTypes.FALLING_ANVIL))
-			return false;
-		if (damagesource.is(DamageTypes.DRAGON_BREATH))
-			return false;
-		if (damagesource.is(DamageTypes.WITHER) || damagesource.is(DamageTypes.WITHER_SKULL))
+		hurtEntity(world, x, y, z, entity, sourceentity);
+		if (checkDamage(damagesource))
 			return false;
 		return super.hurt(damagesource, amount);
+	}
+
+	public static boolean checkDamage(DamageSource damagesource){
+        return damagesource.is(DamageTypes.IN_FIRE) || damagesource.getDirectEntity() instanceof AbstractArrow ||
+                damagesource.getDirectEntity() instanceof ThrownPotion || damagesource.getDirectEntity() instanceof AreaEffectCloud ||
+                damagesource.is(DamageTypes.FALL) || damagesource.is(DamageTypes.CACTUS) || damagesource.is(DamageTypes.DROWN) ||
+                damagesource.is(DamageTypes.LIGHTNING_BOLT) || damagesource.is(DamageTypes.EXPLOSION) || damagesource.is(DamageTypes.PLAYER_EXPLOSION) ||
+                damagesource.is(DamageTypes.TRIDENT) || damagesource.is(DamageTypes.FALLING_ANVIL) || damagesource.is(DamageTypes.DRAGON_BREATH) ||
+                damagesource.is(DamageTypes.WITHER) || damagesource.is(DamageTypes.WITHER_SKULL);
+    }
+
+	public static void hurtEntity(LevelAccessor world, double x, double y, double z, Entity entity, Entity sourceentity) {
+		if (entity == null || sourceentity == null)
+			return;
+		if (sourceentity instanceof Player || sourceentity instanceof ServerPlayer) {
+			if (!entity.level().isClientSide())
+				entity.discard();
+			if (world instanceof ServerLevel _level) {
+				Entity entityToSpawn = PotatowarModEntities.PROTOTYPE_1.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+				if (entityToSpawn != null) {
+				}
+			}
+			if (!world.isClientSide() && world.getServer() != null)
+				world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("Fine I guess we will do it your way."), false);
+		}
 	}
 
 	@Override

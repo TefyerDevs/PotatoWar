@@ -18,6 +18,6 @@ public class CorruptedplayerRenderer extends HumanoidMobRenderer<Corruptedplayer
 
 	@Override
 	public ResourceLocation getTextureLocation(CorruptedplayerEntity entity) {
-		return new ResourceLocation("potatowar:textures/entities/pmcskin3d-steve.png");
+		return new ResourceLocation("potatowar:textures/entities/glitch_2.png");
 	}
 }

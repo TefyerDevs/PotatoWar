@@ -1,6 +1,11 @@
 
 package net.tefyer.potatowar.entity;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
 
@@ -18,13 +23,6 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerBossEvent;
@@ -32,8 +30,9 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 
-import net.tefyer.potatowar.procedures.GlitchOnInitialEntitySpawnProcedure;
-import net.tefyer.potatowar.procedures.GlitchOnEntityTickUpdateProcedure;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.tefyer.potatowar.PotatowarMod;
+import net.tefyer.potatowar.network.PotatowarModVariables;
 import net.tefyer.potatowar.init.PotatowarModEntities;
 
 import javax.annotation.Nullable;
@@ -95,14 +94,72 @@ public class GlitchEntity extends Monster {
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		GlitchOnInitialEntitySpawnProcedure.execute(world, this.getX(), this.getY(), this.getZ(), this);
+		spawn(world, this.getX(), this.getY(), this.getZ(), this);
 		return retval;
+	}
+
+	public static void spawn(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (entity == null)
+			return;
+		if (world instanceof Level _level) {
+			if (!_level.isClientSide()) {
+				_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:mice_on_venus")), SoundSource.MUSIC, 1, 1);
+			} else {
+				_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:mice_on_venus")), SoundSource.MUSIC, 1, 1, false);
+			}
+		}
+		{
+			boolean _setval = true;
+			entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+				capability.BossFight1 = _setval;
+				capability.syncPlayerVariables(entity);
+			});
+		}
+		PotatowarMod.queueServerWork(3120, () -> {
+			{
+				boolean _setval = false;
+				entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+					capability.BossFight1 = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		});
 	}
 
 	@Override
 	public void baseTick() {
 		super.baseTick();
-		GlitchOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+		tickUpdate(this.level(), this.getX(), this.getY(), this.getZ(), this);
+	}
+
+	public static void tickUpdate(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (entity == null)
+			return;
+		if ((entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PotatowarModVariables.PlayerVariables())).BossFight1 == true) {
+			{
+				boolean _setval = false;
+				entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+					capability.BossFight1 = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			if (world instanceof Level _level) {
+				if (!_level.isClientSide()) {
+					_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:mice_on_venus")), SoundSource.NEUTRAL, 1, 1);
+				} else {
+					_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:mice_on_venus")), SoundSource.NEUTRAL, 1, 1, false);
+				}
+			}
+			PotatowarMod.queueServerWork(3120, () -> {
+				{
+					boolean _setval = true;
+					entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+						capability.BossFight1 = _setval;
+						capability.syncPlayerVariables(entity);
+					});
+				}
+			});
+		}
 	}
 
 	@Override

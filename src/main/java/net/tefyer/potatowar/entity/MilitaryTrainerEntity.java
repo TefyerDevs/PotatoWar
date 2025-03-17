@@ -1,6 +1,16 @@
 
 package net.tefyer.potatowar.entity;
 
+import io.netty.buffer.Unpooled;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
@@ -37,10 +47,9 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 
-import net.tefyer.potatowar.procedures.MilitaryTrainerRightClickedOnEntity1Procedure;
-import net.tefyer.potatowar.procedures.MilitaryTrainerOnInitialEntitySpawnProcedure;
 import net.tefyer.potatowar.init.PotatowarModItems;
 import net.tefyer.potatowar.init.PotatowarModEntities;
+import net.tefyer.potatowar.world.inventory.MilitaryTrainerKitsMenu;
 
 import javax.annotation.Nullable;
 
@@ -110,8 +119,34 @@ public class MilitaryTrainerEntity extends Monster {
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		MilitaryTrainerOnInitialEntitySpawnProcedure.execute(this);
+		finSpawn(this);
 		return retval;
+	}
+
+
+	public static void finSpawn(Entity entity) {
+		if (entity == null)
+			return;
+		double RandomNum = 0;
+		RandomNum = Mth.nextInt(RandomSource.create(), 1, 5);
+		entity.getPersistentData().putDouble("potatowar:KitPrice", (Mth.nextInt(RandomSource.create(), 10, 64)));
+		entity.getPersistentData().putDouble("potatoWar:FactionID", 1);
+		if (RandomNum >= 5) {
+			entity.getPersistentData().putDouble("potatowar:KitID", 5);
+			entity.getPersistentData().putDouble("potatowar:KitPrice", (Mth.nextInt(RandomSource.create(), 2, 5)));
+		} else if (RandomNum >= 4) {
+			entity.getPersistentData().putDouble("potatowar:KitID", 4);
+			entity.getPersistentData().putDouble("potatowar:KitPrice", (Mth.nextInt(RandomSource.create(), 5, 10)));
+		} else if (RandomNum >= 3) {
+			entity.getPersistentData().putDouble("potatowar:KitID", 3);
+			entity.getPersistentData().putDouble("potatowar:KitPrice", (Mth.nextInt(RandomSource.create(), 15, 30)));
+		} else if (RandomNum >= 2) {
+			entity.getPersistentData().putDouble("potatowar:KitID", 2);
+			entity.getPersistentData().putDouble("potatowar:KitPrice", (Mth.nextInt(RandomSource.create(), 5, 10)));
+		} else if (RandomNum >= 1) {
+			entity.getPersistentData().putDouble("potatowar:KitID", 1);
+			entity.getPersistentData().putDouble("potatowar:KitPrice", (Mth.nextInt(RandomSource.create(), 30, 45)));
+		}
 	}
 
 	@Override
@@ -125,8 +160,31 @@ public class MilitaryTrainerEntity extends Monster {
 		Entity entity = this;
 		Level world = this.level();
 
-		MilitaryTrainerRightClickedOnEntity1Procedure.execute(world, x, y, z, entity, sourceentity);
+		mobInteract(x, y, z, entity, sourceentity);
 		return retval;
+	}
+
+	public static void mobInteract(double x, double y, double z, Entity entity, Entity sourceentity) {
+		if (entity == null || sourceentity == null)
+			return;
+		double RandomNum = 0;
+		sourceentity.getPersistentData().putDouble("potatoWar:FactionID", (entity.getPersistentData().getDouble("potatoWar:FactionID")));
+		sourceentity.getPersistentData().putDouble("potatowar:KitPrice", (entity.getPersistentData().getDouble("potatowar:KitPrice")));
+		sourceentity.getPersistentData().putDouble("potatowar:KitID", (entity.getPersistentData().getDouble("potatowar:KitID")));
+		if (sourceentity instanceof ServerPlayer _ent) {
+			BlockPos _bpos = BlockPos.containing(x, y, z);
+			NetworkHooks.openScreen((ServerPlayer) _ent, new MenuProvider() {
+				@Override
+				public Component getDisplayName() {
+					return Component.literal("MilitaryTrainerKits");
+				}
+
+				@Override
+				public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+					return new MilitaryTrainerKitsMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
+				}
+			}, _bpos);
+		}
 	}
 
 	public static void init() {

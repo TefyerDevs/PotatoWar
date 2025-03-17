@@ -18,6 +18,6 @@ public class Prototype1Renderer extends HumanoidMobRenderer<Prototype1Entity, Hu
 
 	@Override
 	public ResourceLocation getTextureLocation(Prototype1Entity entity) {
-		return new ResourceLocation("potatowar:textures/entities/speednintendo-s-protogen-on-planetminecraft-com.png");
+		return new ResourceLocation("potatowar:textures/entities/protogen.png");
 	}
 }

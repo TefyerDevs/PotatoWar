@@ -1,6 +1,8 @@
 
 package net.tefyer.potatowar.entity;
 
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
@@ -33,8 +35,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 
-import net.tefyer.potatowar.procedures.SheildsProcedure;
-import net.tefyer.potatowar.procedures.ProtoDefenderEntityDiesProcedure;
+import net.tefyer.potatowar.network.PotatowarModVariables;
 import net.tefyer.potatowar.init.PotatowarModEntities;
 
 import javax.annotation.Nullable;
@@ -106,14 +107,25 @@ public class ProtoDefenderEntity extends Monster {
 	@Override
 	public void die(DamageSource source) {
 		super.die(source);
-		ProtoDefenderEntityDiesProcedure.execute(this.level());
+		die(this.level());
+	}
+	public static void die(LevelAccessor world) {
+		if (!world.isClientSide() && world.getServer() != null)
+			world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("Generator Destroyed"), false);
+		PotatowarModVariables.WorldVariables.get(world).BossShield = PotatowarModVariables.WorldVariables.get(world).BossShield - 1;
+		PotatowarModVariables.WorldVariables.get(world).syncData(world);
 	}
 
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		SheildsProcedure.execute(world);
+		spawn(world);
 		return retval;
+	}
+
+	public static void spawn(LevelAccessor world) {
+		PotatowarModVariables.WorldVariables.get(world).BossShield = 2;
+		PotatowarModVariables.WorldVariables.get(world).syncData(world);
 	}
 
 	@Override

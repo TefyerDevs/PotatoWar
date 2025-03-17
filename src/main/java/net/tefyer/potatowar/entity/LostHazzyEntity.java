@@ -1,6 +1,15 @@
 
 package net.tefyer.potatowar.entity;
 
+import net.minecraft.commands.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.network.NetworkHooks;
@@ -38,10 +47,8 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.nbt.CompoundTag;
 
-import net.tefyer.potatowar.procedures.LostHazzyOnInitialEntitySpawnProcedure;
-import net.tefyer.potatowar.procedures.LostHazzyOnInitialEntitySpawn1Procedure;
-import net.tefyer.potatowar.procedures.LostHazzyEntityDiesProcedure;
-import net.tefyer.potatowar.procedures.HazzycloneThisEntityKillsAnotherOneProcedure;
+import net.tefyer.potatowar.PotatowarMod;
+import net.tefyer.potatowar.network.PotatowarModVariables;
 import net.tefyer.potatowar.init.PotatowarModEntities;
 
 import javax.annotation.Nullable;
@@ -119,26 +126,98 @@ public class LostHazzyEntity extends Monster {
 	@Override
 	public void die(DamageSource source) {
 		super.die(source);
-		LostHazzyEntityDiesProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ());
+		onDeath(this.level(), this.getX(), this.getY(), this.getZ());
+	}
+
+	public static void onDeath(LevelAccessor world, double x, double y, double z) {
+		if (world instanceof ServerLevel _level)
+			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(), "stopsound @a");
 	}
 
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-		LostHazzyOnInitialEntitySpawn1Procedure.execute(world, this.getX(), this.getY(), this.getZ(), this);
+		finSpawn(world, this.getX(), this.getY(), this.getZ(), this);
 		return retval;
+	}
+
+	public static void finSpawn(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (entity == null)
+			return;
+		if (world instanceof Level _level) {
+			if (!_level.isClientSide()) {
+				_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:boss5")), SoundSource.MUSIC, 1, 1);
+			} else {
+				_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:boss5")), SoundSource.MUSIC, 1, 1, false);
+			}
+		}
+		{
+			boolean _setval = true;
+			entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+				capability.BossFight1 = _setval;
+				capability.syncPlayerVariables(entity);
+			});
+		}
+		PotatowarMod.queueServerWork(3240, () -> {
+			{
+				boolean _setval = false;
+				entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+					capability.BossFight1 = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		});
 	}
 
 	@Override
 	public void awardKillScore(Entity entity, int score, DamageSource damageSource) {
 		super.awardKillScore(entity, score, damageSource);
-		HazzycloneThisEntityKillsAnotherOneProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ());
+		awardKill(this.level(), this.getX(), this.getY(), this.getZ());
 	}
+	public static void awardKill(LevelAccessor world, double x, double y, double z) {
+		if (world instanceof ServerLevel _level) {
+			Entity entityToSpawn = PotatowarModEntities.HAZZYCLONE.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+			if (entityToSpawn != null) {
+				entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
+			}
+		}
+	}
+
 
 	@Override
 	public void baseTick() {
 		super.baseTick();
-		LostHazzyOnInitialEntitySpawnProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
+		baseTick(this.level(), this.getX(), this.getY(), this.getZ(), this);
+	}
+
+	public static void baseTick(LevelAccessor world, double x, double y, double z, Entity entity) {
+		if (entity == null)
+			return;
+		if ((entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PotatowarModVariables.PlayerVariables())).BossFight1 == true) {
+			{
+				boolean _setval = false;
+				entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+					capability.BossFight1 = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			if (world instanceof Level _level) {
+				if (!_level.isClientSide()) {
+					_level.playSound(null, BlockPos.containing(x, y, z), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:boss5")), SoundSource.MUSIC, 1, 1);
+				} else {
+					_level.playLocalSound(x, y, z, ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("potatowar:boss5")), SoundSource.MUSIC, 1, 1, false);
+				}
+			}
+			PotatowarMod.queueServerWork(2960, () -> {
+				{
+					boolean _setval = true;
+					entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+						capability.BossFight1 = _setval;
+						capability.syncPlayerVariables(entity);
+					});
+				}
+			});
+		}
 	}
 
 	@Override

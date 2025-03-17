@@ -18,6 +18,6 @@ public class HumanKnightRenderer extends HumanoidMobRenderer<HumanKnightEntity, 
 
 	@Override
 	public ResourceLocation getTextureLocation(HumanKnightEntity entity) {
-		return new ResourceLocation("potatowar:textures/entities/classic-steve-on-planetminecraft-com.png");
+		return new ResourceLocation("potatowar:textures/entities/steve.png");
 	}
 }
