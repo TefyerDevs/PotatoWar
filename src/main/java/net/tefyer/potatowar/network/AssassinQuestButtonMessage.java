@@ -22,7 +22,6 @@ import net.minecraft.core.BlockPos;
 
 import net.tefyer.potatowar.procedures.AssassinQuest1Procedure;
 import net.tefyer.potatowar.world.inventory.AssassinQuestMenu;
-import net.tefyer.potatowar.procedures.AcceptQuestProcedure;
 import net.tefyer.potatowar.PotatowarMod;
 
 import java.util.Comparator;
