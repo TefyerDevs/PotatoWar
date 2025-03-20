@@ -20,17 +20,18 @@ import net.minecraft.world.level.block.Blocks;
 import net.tefyer.potatowar.init.PotatowarModBlocks;
 import net.tefyer.potatowar.init.PotatowarModEntities;
 import net.tefyer.potatowar.multiblock.Multiblock;
+import net.tefyer.potatowar.utils.EntityUtils;
 
 import java.util.List;
 
-public class CorruptedPlayerDataItem extends Item {
+public class CorruptedPlayerDataItem extends Item implements IMultiBlockedItem {
 
 	public Multiblock multiblock = new Multiblock(PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState().getBlock());
 
 	public CorruptedPlayerDataItem() {
 		super(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
 
-		enterMultiblockData();
+		addMultiBlockData();
 	}
 
 
@@ -45,32 +46,25 @@ public class CorruptedPlayerDataItem extends Item {
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
 		super.useOn(context);
-		checkSummon(context.getLevel(), context.getClickedPos().getX(), context.getClickedPos().getY(), context.getClickedPos().getZ(), context.getPlayer());
+
+		checkMultiblock(context.getLevel(), context.getClickedPos().getX(), context.getClickedPos().getY(), context.getClickedPos().getZ(), context.getPlayer());
+
 		return InteractionResult.SUCCESS;
 	}
-
-	public void checkSummon(LevelAccessor world, int x, int y, int z, Entity entity) {
+	@Override
+	public void checkMultiblock(LevelAccessor world, int worldX, int worldY, int worldZ, Entity entity) {
 		if (entity == null)
 			return;
-		boolean found = false;
-		double sx = 0;
-		double sy = 0;
-		double sz = 0;
-		if (multiblock.checkMultiblock(world, x, y, z)) {
 
-			multiblock.replaceBlocks(world,x,y,z);
-			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = PotatowarModEntities.CORRUPTEDPLAYER.get().spawn(_level, BlockPos.containing(x, y + 1, z), MobSpawnType.MOB_SUMMONED);
-				if (entityToSpawn != null) {
-					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
-				}
-			}
-			if (entity instanceof Player _player && !_player.level().isClientSide())
-				_player.displayClientMessage(Component.literal("Error Entity.Herobrine not found."), false);
+		if (multiblock.checkMultiblock(world, worldX, worldY, worldZ)) {
+
+			multiblock.replaceBlocks(world,worldX,worldY,worldZ);
+			EntityUtils.spawnEntityWithClientString(world,entity, PotatowarModEntities.CORRUPTEDPLAYER.get(),worldX,worldY,worldZ,"Error Entity.Herobrine not found.");
 		}
 	}
 
-	private void enterMultiblockData() {
+	@Override
+	public void addMultiBlockData() {
 		multiblock.addBlockData(0,0,0, Blocks.FIRE);
 
 
