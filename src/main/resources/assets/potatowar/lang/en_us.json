@@ -177,5 +177,15 @@
   "gui.potatowar.military_trainer_kits.label_price": "Price:",
   "item.potatowar.human_scout_spawn_egg": "Human Scout Spawn Egg",
   "gui.potatowar.military_trainer_kits.button_buy": "Buy",
-  "subtitles.living_mice": "Forgotten Memories"
+  "subtitles.living_mice": "Forgotten Memories",
+
+  "lore.potatowar.memory_shard": "Murder A Remnant",
+  "lore.potatowar.blank_kit": "Useful to give commands.",
+  "lore.potatowar.military_kit": "Sells things... And Goes to war.",
+  "lore.potatowar.scout_kit": "Get The Military in here!!",
+  "lore.potatowar.beserker_kit": "The Military's Finest worker.",
+  "lore.potatowar.milita_kit": "The Military's Finest worker.",
+  "lore.potatowar.fryer_kit": "The Military's Finest worker.",
+  "lore.potatowar.army_kit": "The Military's Finest worker.",
+  "lore.potatowar.knight_kit": "The Military's Finest worker."
 }

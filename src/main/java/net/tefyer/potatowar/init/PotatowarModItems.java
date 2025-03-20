@@ -23,14 +23,14 @@ import net.tefyer.potatowar.PotatowarMod;
 public class PotatowarModItems {
 	public static final ItemDeferredRegister REGISTRY = new  ItemDeferredRegister(PotatowarMod.MODID);
 	// KITS
-	public static final RegistryObject<Item> BLANK_KIT = REGISTRY.registerKit("blank_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> BESERKER_KIT = REGISTRY.registerKit("beserker_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> MILITARY_KIT = REGISTRY.registerKit("military_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> SCOUT_KIT = REGISTRY.registerKit("scout_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> KNIGHT_KIT = REGISTRY.registerKit("knight_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> ARMY_KIT = REGISTRY.registerKit("army_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> FRYER_KIT = REGISTRY.registerKit("fryer_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).build());
-	public static final RegistryObject<Item> MILITA_KIT = REGISTRY.registerKit("milita_kit",()-> new NormalItem.Builder().setRarity(Rarity.COMMON).build());
+	public static final RegistryObject<Item> BLANK_KIT = REGISTRY.registerKit("blank_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).setSize(1).setItemId("blank_kit").build());
+	public static final RegistryObject<Item> BESERKER_KIT = REGISTRY.registerKit("beserker_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).setSize(1).setItemId("beserker_kit").build());
+	public static final RegistryObject<Item> MILITARY_KIT = REGISTRY.registerKit("military_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).setSize(1).setItemId("military_kit").build());
+	public static final RegistryObject<Item> SCOUT_KIT = REGISTRY.registerKit("scout_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).setSize(1).setItemId("scout_kit").build());
+	public static final RegistryObject<Item> KNIGHT_KIT = REGISTRY.registerKit("knight_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).setSize(1).setItemId("knight_kit").build());
+	public static final RegistryObject<Item> ARMY_KIT = REGISTRY.registerKit("army_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).setSize(1).setItemId("army_kit").build());
+	public static final RegistryObject<Item> FRYER_KIT = REGISTRY.registerKit("fryer_kit",()->  new NormalItem.Builder().setRarity(Rarity.COMMON).setSize(1).setItemId("fryer_kit").build());
+	public static final RegistryObject<Item> MILITA_KIT = REGISTRY.registerKit("milita_kit",()-> new NormalItem.Builder().setRarity(Rarity.COMMON).setSize(1).setItemId("milita_kit").build());
 
 	// SPAWN EGGS
 	public static final RegistryObject<Item> POTATO_MAN_SPAWN_EGG = REGISTRY.register("potato_man_spawn_egg", () -> new ForgeSpawnEggItem(PotatowarModEntities.POTATO_MAN, -256, -26368, new Item.Properties()));
@@ -80,7 +80,7 @@ public class PotatowarModItems {
 
 	public static final RegistryObject<Item> BLOCKRANDOMIZE = REGISTRY.register("blockrandomize", () -> new BlockrandomizeItem());
 	public static final RegistryObject<Item> TEDDY = REGISTRY.register("teddy", () -> new TeddyItem());
-	public static final RegistryObject<Item> MEMORY_SHARD = REGISTRY.register("memory_shard", () -> new MemoryShardItem());
+	public static final RegistryObject<Item> MEMORY_SHARD = REGISTRY.register("memory_shard", () -> new NormalItem.Builder().setRarity(Rarity.RARE).setItemId("memory_shard").build());
 	public static final RegistryObject<Item> MEMORIES = REGISTRY.register("memories", () -> new MemoriesItem());
 	public static final RegistryObject<Item> CORRUPTED_PLAYER_DATA = REGISTRY.register("corrupted_player_data", () -> new CorruptedPlayerDataItem());
 	public static final RegistryObject<Item> TOWN_CENTER = REGISTRY.register("town_center", () -> new TownCenterItem());

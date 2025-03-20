@@ -19,13 +19,21 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.tefyer.potatowar.init.PotatowarModBlocks;
 import net.tefyer.potatowar.init.PotatowarModEntities;
+import net.tefyer.potatowar.multiblock.Multiblock;
 
 import java.util.List;
 
 public class CorruptedPlayerDataItem extends Item {
+
+	public Multiblock multiblock = new Multiblock(PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState().getBlock());
+
 	public CorruptedPlayerDataItem() {
 		super(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
+
+		enterMultiblockData();
 	}
+
+
 
 	@Override
 	public void appendHoverText(ItemStack itemstack, Level level, List<Component> list, TooltipFlag flag) {
@@ -41,27 +49,16 @@ public class CorruptedPlayerDataItem extends Item {
 		return InteractionResult.SUCCESS;
 	}
 
-	public void checkSummon(LevelAccessor world, double x, double y, double z, Entity entity) {
+	public void checkSummon(LevelAccessor world, int x, int y, int z, Entity entity) {
 		if (entity == null)
 			return;
 		boolean found = false;
 		double sx = 0;
 		double sy = 0;
 		double sz = 0;
-		if (checkIfMultiBlock(world, x, y, z)) {
-			world.setBlock(BlockPos.containing(x - 1, y, z), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
-			world.setBlock(BlockPos.containing(x + 1, y, z), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
-			world.setBlock(BlockPos.containing(x, y, z + 1), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
-			world.setBlock(BlockPos.containing(x, y, z - 1), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
-			world.setBlock(BlockPos.containing(x - 1, y - 1, z), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
-			world.setBlock(BlockPos.containing(x + 1, y - 1, z), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
-			world.setBlock(BlockPos.containing(x, y - 1, z + 1), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
-			world.setBlock(BlockPos.containing(x, y - 1, z - 1), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
-			world.setBlock(BlockPos.containing(x - 1, y - 1, z - 1), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
-			world.setBlock(BlockPos.containing(x + 1, y - 1, z + 1), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
-			world.setBlock(BlockPos.containing(x - 1, y - 1, z + 1), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
-			world.setBlock(BlockPos.containing(x + 1, y - 1, z - 1), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
-			world.setBlock(BlockPos.containing(x, y, z), PotatowarModBlocks.DIGITAL_BLOCK.get().defaultBlockState(), 3);
+		if (multiblock.checkMultiblock(world, x, y, z)) {
+
+			multiblock.replaceBlocks(world,x,y,z);
 			if (world instanceof ServerLevel _level) {
 				Entity entityToSpawn = PotatowarModEntities.CORRUPTEDPLAYER.get().spawn(_level, BlockPos.containing(x, y + 1, z), MobSpawnType.MOB_SUMMONED);
 				if (entityToSpawn != null) {
@@ -73,13 +70,29 @@ public class CorruptedPlayerDataItem extends Item {
 		}
 	}
 
-	public boolean checkIfMultiBlock(LevelAccessor world, double x, double y,double z){
-		return  (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.REDSTONE_TORCH && (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.REDSTONE_TORCH
-				&& (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.REDSTONE_TORCH && (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.REDSTONE_TORCH
-				&& (world.getBlockState(BlockPos.containing(x - 1, y - 1, z))).getBlock() == Blocks.GOLD_BLOCK && (world.getBlockState(BlockPos.containing(x + 1, y - 1, z))).getBlock() == Blocks.GOLD_BLOCK
-				&& (world.getBlockState(BlockPos.containing(x, y - 1, z + 1))).getBlock() == Blocks.GOLD_BLOCK && (world.getBlockState(BlockPos.containing(x, y - 1, z - 1))).getBlock() == Blocks.GOLD_BLOCK
-				&& (world.getBlockState(BlockPos.containing(x - 1, y - 1, z - 1))).getBlock() == Blocks.GOLD_BLOCK && (world.getBlockState(BlockPos.containing(x + 1, y - 1, z + 1))).getBlock() == Blocks.GOLD_BLOCK
-				&& (world.getBlockState(BlockPos.containing(x - 1, y - 1, z + 1))).getBlock() == Blocks.GOLD_BLOCK && (world.getBlockState(BlockPos.containing(x + 1, y - 1, z - 1))).getBlock() == Blocks.GOLD_BLOCK
-				&& (world.getBlockState(BlockPos.containing(x, y, z))).getBlock() == Blocks.NETHERRACK;
+	private void enterMultiblockData() {
+		multiblock.addBlockData(0,0,0, Blocks.FIRE);
+
+
+		multiblock.addBlockData(0,-1,0, Blocks.NETHERRACK);
+		multiblock.addBlockData(0,-2,0, Blocks.NETHERRACK);
+
+
+		multiblock.addBlockData(-1,-1,0, Blocks.REDSTONE_TORCH);
+		multiblock.addBlockData(1,-1,0, Blocks.REDSTONE_TORCH);
+		multiblock.addBlockData(0,-1,-1, Blocks.REDSTONE_TORCH);
+		multiblock.addBlockData(0,-1,1, Blocks.REDSTONE_TORCH);
+
+
+		multiblock.addBlockData(-1,-2,1, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(-1,-2,0, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(-1,-2,-1, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(1,-2,1, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(1,-2,0, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(1,-2,-1, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(0,-2,1, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(0,-2,-1, Blocks.GOLD_BLOCK);
 	}
+
+
 }

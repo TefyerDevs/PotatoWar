@@ -1,6 +1,7 @@
 
 package net.tefyer.potatowar.network;
 
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -12,7 +13,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.core.BlockPos;
 
 import net.tefyer.potatowar.world.inventory.ConfrimAbandonQuestMenu;
-import net.tefyer.potatowar.procedures.AbandonQuestProcedure;
 import net.tefyer.potatowar.PotatowarMod;
 
 import java.util.function.Supplier;
@@ -64,8 +64,23 @@ public class ConfrimAbandonQuestButtonMessage {
 			return;
 		if (buttonID == 0) {
 
-			AbandonQuestProcedure.execute(entity);
+			buttonHandler(entity);
 		}
+	}
+
+	public static void buttonHandler(Entity entity) {
+		if (entity == null)
+			return;
+		{
+			boolean _setval = false;
+			entity.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
+				capability.HasQuest = _setval;
+				capability.syncPlayerVariables(entity);
+			});
+		}
+		entity.getPersistentData().putDouble("potatowar:CivilianID", 0);
+		if (entity instanceof Player _player)
+			_player.closeContainer();
 	}
 
 	@SubscribeEvent

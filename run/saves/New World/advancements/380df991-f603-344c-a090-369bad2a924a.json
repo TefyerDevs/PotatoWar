@@ -15,13 +15,87 @@
     "criteria": {
       "minecraft:old_growth_pine_taiga": "2025-03-15 18:45:19 -0400",
       "minecraft:taiga": "2025-03-15 14:59:04 -0400",
-      "minecraft:river": "2025-03-15 15:00:06 -0400"
+      "minecraft:river": "2025-03-15 15:00:06 -0400",
+      "minecraft:forest": "2025-03-18 18:15:46 -0400"
     },
     "done": false
   },
   "minecraft:adventure/root": {
     "criteria": {
       "killed_something": "2025-03-15 14:59:56 -0400"
+    },
+    "done": true
+  },
+  "potatowar:social_credit": {
+    "criteria": {
+      "social_credit_0": "2025-03-17 19:56:17 -0400"
+    },
+    "done": true
+  },
+  "potatowar:military_commander": {
+    "criteria": {
+      "military_commander_0": "2025-03-17 19:56:58 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/chest": {
+    "criteria": {
+      "has_lots_of_items": "2025-03-17 19:57:49 -0400"
+    },
+    "done": true
+  },
+  "potatowar:morally_wrong": {
+    "criteria": {
+      "morally_wrong_0": "2025-03-17 19:58:12 -0400"
+    },
+    "done": true
+  },
+  "potatowar:outlaw": {
+    "criteria": {
+      "outlaw_0": "2025-03-18 17:17:30 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/gold_ingot_from_gold_block": {
+    "criteria": {
+      "has_gold_block": "2025-03-18 18:16:45 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/nether_brick": {
+    "criteria": {
+      "has_netherrack": "2025-03-18 18:16:48 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/repeater": {
+    "criteria": {
+      "has_redstone_torch": "2025-03-18 18:16:53 -0400"
+    },
+    "done": true
+  },
+  "minecraft:nether/netherite_armor": {
+    "criteria": {
+      "netherite_armor": "2025-03-18 18:17:23 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/mojang_banner_pattern": {
+    "criteria": {
+      "has_enchanted_golden_apple": "2025-03-18 18:20:32 -0400"
+    },
+    "done": true
+  },
+  "minecraft:husbandry/balanced_diet": {
+    "criteria": {
+      "golden_apple": "2025-03-18 18:21:14 -0400",
+      "enchanted_golden_apple": "2025-03-18 18:21:16 -0400"
+    },
+    "done": false
+  },
+  "minecraft:husbandry/root": {
+    "criteria": {
+      "consumed_item": "2025-03-18 18:21:14 -0400"
     },
     "done": true
   },

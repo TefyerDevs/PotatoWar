@@ -2,10 +2,14 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         maven { url = 'https://maven.parchmentmc.org' } // Add this line
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         maven {
             name = 'MinecraftForge'
             url = 'https://maven.minecraftforge.net/'
         }
+    }
+    plugins {
+        id 'org.jetbrains.kotlin.jvm' version '2.1.10'
     }
 }
 

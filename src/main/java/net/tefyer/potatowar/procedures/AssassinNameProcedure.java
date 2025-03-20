@@ -5,61 +5,43 @@ import net.minecraft.util.Mth;
 
 public class AssassinNameProcedure {
 	public static String execute() {
-		double randomnumber = 0;
-		String AssassinName = "";
-		String lastname = "";
-		randomnumber = Mth.nextInt(RandomSource.create(), 1, 12);
-		if (randomnumber == 12) {
-			AssassinName = "Phantomblade";
-		} else if (randomnumber == 11) {
-			AssassinName = "Nightshade";
-		} else if (randomnumber == 10) {
-			AssassinName = "Silentstrike";
-		} else if (randomnumber == 9) {
-			AssassinName = "Venomcloak";
-		} else if (randomnumber == 8) {
-			AssassinName = "Deathshroud";
-		} else if (randomnumber == 7) {
-			AssassinName = "Crimsonflash";
-		} else if (randomnumber == 6) {
-			AssassinName = "Bulletcrash";
-		} else if (randomnumber == 5) {
-			AssassinName = "Bob";
-		} else if (randomnumber == 4) {
-			AssassinName = "Ironkill";
-		} else if (randomnumber == 3) {
-			AssassinName = "Hollowshot";
-		} else if (randomnumber == 2) {
-			AssassinName = "Blacksaw";
-		} else if (randomnumber == 1) {
-			AssassinName = "Darkbeat";
+		int randomnumber = Mth.nextInt(RandomSource.create(), 1, 12);;
+		String assassinname;
+		String lastname;
+
+
+		switch (randomnumber){
+			case 1: assassinname = "Darkbeat";
+			case 2: assassinname = "Blacksaw";
+			case 3: assassinname = "Hollowshot";
+			case 4: assassinname = "Ironkill";
+			case 5: assassinname = "Bob";
+			case 6: assassinname = "Bulletcrash";
+			case 7: assassinname = "Crimsonflash";
+			case 8: assassinname = "Deathshroud";
+			case 9: assassinname = "Venomcloak";
+			case 10: assassinname = "Silentstrike";
+			case 11: assassinname = "Nightshade";
+			case 12: assassinname = "Phantomblade";
+			default: assassinname = "NULL";
 		}
 		randomnumber = Mth.nextInt(RandomSource.create(), 1, 12);
-		if (randomnumber == 12) {
-			lastname = "The Crimson Viper";
-		} else if (randomnumber == 11) {
-			lastname = "Veiled Marauder";
-		} else if (randomnumber == 10) {
-			lastname = "The Lurking Doom";
-		} else if (randomnumber == 9) {
-			lastname = "Netherblade";
-		} else if (randomnumber == 8) {
-			lastname = "Obsidian Wraith";
-		} else if (randomnumber == 7) {
-			lastname = "Veil of Darkness";
-		} else if (randomnumber == 6) {
-			lastname = "Shadeborne";
-		} else if (randomnumber == 5) {
-			lastname = "The Destroyer";
-		} else if (randomnumber == 4) {
-			lastname = "Abyssal Executioner";
-		} else if (randomnumber == 3) {
-			lastname = "The Enigma";
-		} else if (randomnumber == 2) {
-			lastname = "Cloak of Doom";
-		} else if (randomnumber == 1) {
-			lastname = "Whispering Death";
+
+		switch (randomnumber){
+			case 1: lastname = "Whispering Death";
+			case 2: lastname = "Cloak of Doom";
+			case 3: lastname = "The Enigma";
+			case 4: lastname = "Abyssal Executioner";
+			case 5: lastname = "The Destroyer";
+			case 6: lastname = "Shadeborne";
+			case 7: lastname = "Veil of Darkness";
+			case 8: lastname = "Obsidian Wraith";
+			case 9: lastname = "Netherblade";
+			case 10: lastname = "The Lurking Doom";
+			case 11: lastname = "Veiled Marauder";
+			case 12: lastname = "The Crimson Viper";
+			default: lastname = "NULL";
 		}
-		return AssassinName + "" + (" " + lastname);
+		return assassinname + " " + lastname;
 	}
 }
