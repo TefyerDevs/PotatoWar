@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "potatowar:item/blank_kit",
+    "layer1": "potatowar:item/kit/beserker_kit_overlay"
+  }
+}
