@@ -1,6 +1,7 @@
 
 package net.tefyer.potatowar.block;
 
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.common.PlantType;
 
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -10,10 +11,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.FlowerBlock;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.BlockGetter;
@@ -34,7 +31,7 @@ public class Oddpotato2Block extends FlowerBlock implements BonemealableBlock {
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		return Shapes.empty();
+		return Block.box(0,0,0,16,6,16);
 	}
 
 	@Override

@@ -52,7 +52,7 @@ public class CurrentQuestKeyMessage {
 			return;
 		if (type == 0) {
 
-			CurrentQuestKeyOnKeyPressedProcedure.execute(world, x, y, z, entity);
+			CurrentQuestKeyOnKeyPressedProcedure.execute(x, y, z, entity);
 		}
 	}
 

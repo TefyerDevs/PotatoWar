@@ -4,9 +4,9 @@
  */
 package net.tefyer.potatowar.init;
 
-import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -53,9 +53,15 @@ import net.tefyer.potatowar.entity.BeserkerEntity;
 import net.tefyer.potatowar.entity.ArmyGeneralEntity;
 import net.tefyer.potatowar.PotatowarMod;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PotatowarModEntities {
-	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, PotatowarMod.MODID);
+	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES,PotatowarMod.MODID);
+
+	public static final List<RegistryObject<EntityType<?>>> ENTITIES = new ArrayList<>();
+
 	public static final RegistryObject<EntityType<PotatoManEntity>> POTATO_MAN = register("potato_man",
 			EntityType.Builder.<PotatoManEntity>of(PotatoManEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(PotatoManEntity::new)
 
@@ -192,8 +198,9 @@ public class PotatowarModEntities {
 	// Start of user code block custom entities
 	// End of user code block custom entities
 	private static <T extends Entity> RegistryObject<EntityType<T>> register(String registryname, EntityType.Builder<T> entityTypeBuilder) {
-		return REGISTRY.register(registryname, () -> (EntityType<T>) entityTypeBuilder.build(registryname));
+		return REGISTRY.register(registryname, () ->entityTypeBuilder.build(registryname));
 	}
+
 
 	@SubscribeEvent
 	public static void init(FMLCommonSetupEvent event) {

@@ -23,7 +23,7 @@ public class PotatowarModTabs {
 
 	public static final RegistryObject<CreativeModeTab> POTATO_TAB = REGISTRY.register("potato_tab",()-> CreativeModeTab.builder()
 			.title(Component.translatable(PotatowarMod.MODID+".potato_tab"))
-			.icon(()->new ItemStack(PotatowarModItems.ODD_POTATO_PLANT_STG_1.get().asItem()))
+			.icon(()->new ItemStack(PotatowarModItems.FORGOTTEN_WORLDS.get().asItem()))
 			.displayItems((item,output) -> {
 				PotatowarModItems.REGISTRY.ITEMS_LIST.forEach((itemList)->{
 					output.accept(itemList.get());

@@ -37,11 +37,11 @@ public class PotatowarMod {
 
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-
 		PotatowarModSounds.REGISTRY.register(bus);
 		PotatowarModBlocks.REGISTRY.register(bus);
 
 		PotatowarModItems.REGISTRY.register(bus);
+		PotatowarModItems.registerBlocks();
 
 		PotatowarModEntities.REGISTRY.register(bus);
 

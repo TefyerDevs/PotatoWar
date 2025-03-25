@@ -44,11 +44,7 @@ public class BlockrandomizeItem extends Item {
 	}
 
 	public static ItemStackedItem createNewItem(){
-		return new ItemStackedItem() {
-			public ItemStack getItemStack(int sltid, Entity entity) {
-				return getStackedItem(sltid, entity);
-			}
-		};
+		return BlockrandomizeItem::getStackedItem;
 	}
 
 	public static BlockState blockRandomizerBuilder(LevelAccessor world, double x, double y, double z, int randomInt, int targetInt, Entity entity){

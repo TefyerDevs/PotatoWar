@@ -29,12 +29,12 @@ public class BuilderFatigueProcedure {
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
-		if (entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(PotatowarModMobEffects.BUILDERS_FATIUGE.get())) {
-			{
-				BlockPos _pos = BlockPos.containing(x, y, z);
-				Block.dropResources(world.getBlockState(_pos), world, BlockPos.containing(x, y, z), null);
-				world.destroyBlock(_pos, false);
-			}
-		}
+		if (!(entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(PotatowarModMobEffects.BUILDERS_FATIUGE.get())))
+			return;
+		BlockPos _pos = BlockPos.containing(x, y, z);
+		Block.dropResources(world.getBlockState(_pos), world, BlockPos.containing(x, y, z), null);
+		world.destroyBlock(_pos, false);
+
+
 	}
 }

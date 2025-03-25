@@ -70,8 +70,8 @@ public class PotatowarModItems {
 	public static final RegistryObject<Item> SCOUT_LEADER_SPAWN_EGG = REGISTRY.register("scout_leader_spawn_egg", () -> new ForgeSpawnEggItem(PotatowarModEntities.SCOUT_LEADER, -16737895, -16764058, new Item.Properties()));
 
 	// RES
-	public static final RegistryObject<Item> RUBY = REGISTRY.register("ruby", () -> new CommonItem());
-	public static final RegistryObject<Item> TOPAZ = REGISTRY.register("topaz", () -> new CommonItem());
+	public static final RegistryObject<Item> RUBY = REGISTRY.register("ruby", () -> new NormalItem.Builder().setRarity(Rarity.COMMON).setItemId("blood_ruby").build());
+	public static final RegistryObject<Item> TOPAZ = REGISTRY.register("topaz", () -> new NormalItem.Builder().setRarity(Rarity.COMMON).setItemId("black_jade").build());
 
 	public static final RegistryObject<Item> FORGOTTEN_WORLDS = REGISTRY.register("forgotten_worlds", () -> new ForgottenWorldsItem());
 	public static final RegistryObject<Item> DIGITAL_WORLD = REGISTRY.register("digital_world", () -> new DigitalWorldItem());
@@ -86,13 +86,14 @@ public class PotatowarModItems {
 	public static final RegistryObject<Item> TOWN_CENTER = REGISTRY.register("town_center", () -> new TownCenterItem());
 
 
-	public static final RegistryObject<Item> ODD_POTATO_PLANT_STG_1 = block(PotatowarModBlocks.ODD_POTATO_PLANT_STG_1);
-	public static final RegistryObject<Item> ODDPOTATO_2 = block(PotatowarModBlocks.ODDPOTATO_2);
-	public static final RegistryObject<Item> ODDPOTATO_3 = block(PotatowarModBlocks.ODDPOTATO_3);
-	public static final RegistryObject<Item> ODDPOTATO_4 = block(PotatowarModBlocks.ODDPOTATO_4);
-	public static final RegistryObject<Item> POTATO_BLOCK = block(PotatowarModBlocks.POTATO_BLOCK);
-	public static final RegistryObject<Item> DIGITAL_BLOCK = block(PotatowarModBlocks.DIGITAL_BLOCK);
+	public static final RegistryObject<Item> RAW_RUBBER = REGISTRY.register("raw_rubber", () -> new NormalItem.Builder().setRarity(Rarity.COMMON).build());
+	public static final RegistryObject<Item> CONDESED_RUBBER = REGISTRY.register("condesed_rubber", () -> new NormalItem.Builder().setRarity(Rarity.COMMON).build());
 
+	public static void registerBlocks(){
+		for(RegistryObject<Block> block: PotatowarModBlocks.REGISTRY.getEntries()){
+			block(block);
+		}
+	}
 
 	// Start of user code block custom items
 	// End of user code block custom items

@@ -32,9 +32,11 @@ public class BeginMigrationProcedure {
 		if (entity == null)
 			return;
 		if ((entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge:potato"))) || entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("forge:human"))))
-				&& world.getLevelData().getGameRules().getBoolean(PotatowarModGameRules.GREAT_MIGRATION) == true) {
+				&& world.getLevelData().getGameRules().getBoolean(PotatowarModGameRules.GREAT_MIGRATION)) {
 			if (entity instanceof Mob _entity)
-				_entity.getNavigation().moveTo(PotatowarModVariables.WorldVariables.get(world).MigrationX, y, PotatowarModVariables.WorldVariables.get(world).MigrationZ, 1);
+				_entity.getNavigation()
+						.moveTo(PotatowarModVariables.WorldVariables
+								.get(world).MigrationX, y, PotatowarModVariables.WorldVariables.get(world).MigrationZ, 1);
 		}
 	}
 }

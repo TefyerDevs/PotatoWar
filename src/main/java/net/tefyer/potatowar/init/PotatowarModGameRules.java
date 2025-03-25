@@ -10,5 +10,6 @@ import net.minecraft.world.level.GameRules;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class PotatowarModGameRules {
-	public static final GameRules.Key<GameRules.BooleanValue> GREAT_MIGRATION = GameRules.register("greatMigration", GameRules.Category.MOBS, GameRules.BooleanValue.create(false));
+	public static final GameRules.Key<GameRules.BooleanValue> GREAT_MIGRATION =
+			GameRules.register("greatMigration", GameRules.Category.MOBS, GameRules.BooleanValue.create(false));
 }

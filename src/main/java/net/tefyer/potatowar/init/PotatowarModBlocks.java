@@ -10,18 +10,12 @@ import net.minecraftforge.registries.DeferredRegister;
 
 import net.minecraft.world.level.block.Block;
 
-import net.tefyer.potatowar.block.PotatoBlockBlock;
-import net.tefyer.potatowar.block.Oddpotato4Block;
-import net.tefyer.potatowar.block.Oddpotato3Block;
-import net.tefyer.potatowar.block.Oddpotato2Block;
-import net.tefyer.potatowar.block.OddPotatoPlantStg1Block;
-import net.tefyer.potatowar.block.ForgottenWorldsPortalBlock;
-import net.tefyer.potatowar.block.DigitalWorldPortalBlock;
-import net.tefyer.potatowar.block.DigitalBlockBlock;
+import net.tefyer.potatowar.block.*;
 import net.tefyer.potatowar.PotatowarMod;
 
 public class PotatowarModBlocks {
 	public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, PotatowarMod.MODID);
+
 	public static final RegistryObject<Block> FORGOTTEN_WORLDS_PORTAL = REGISTRY.register("forgotten_worlds_portal", () -> new ForgottenWorldsPortalBlock());
 	public static final RegistryObject<Block> DIGITAL_BLOCK = REGISTRY.register("digital_block", () -> new DigitalBlockBlock());
 	public static final RegistryObject<Block> DIGITAL_WORLD_PORTAL = REGISTRY.register("digital_world_portal", () -> new DigitalWorldPortalBlock());
@@ -30,6 +24,9 @@ public class PotatowarModBlocks {
 	public static final RegistryObject<Block> ODDPOTATO_3 = REGISTRY.register("oddpotato_3", () -> new Oddpotato3Block());
 	public static final RegistryObject<Block> ODDPOTATO_4 = REGISTRY.register("oddpotato_4", () -> new Oddpotato4Block());
 	public static final RegistryObject<Block> POTATO_BLOCK = REGISTRY.register("potato_block", () -> new PotatoBlockBlock());
+	public static final RegistryObject<Block> COMPRESSER_BLOCK = REGISTRY.register("compresser_block", () -> new CompresserBlock());
+
+	public static final RegistryObject<Block> RUBBER_LOG = REGISTRY.register("rubber_log",()-> new OddPotatoPlantStg1Block.ModFlammableRotatedPillarBlock());
 	// Start of user code block custom blocks
 	// End of user code block custom blocks
 }

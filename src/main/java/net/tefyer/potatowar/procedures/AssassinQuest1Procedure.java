@@ -1,5 +1,6 @@
 package net.tefyer.potatowar.procedures;
 
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.AABB;
@@ -26,32 +27,30 @@ import java.util.Comparator;
 public class AssassinQuest1Procedure {
 
 
-
+	public static void spawnEntity(LevelAccessor world, double x, double y, double z, EntityType<?> entity){
+		if (world instanceof ServerLevel _level) {
+			Entity entityToSpawn = entity.spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
+			if (entityToSpawn != null) {
+				entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
+			}
+		}
+		if (!world.isClientSide() && world.getServer() != null)
+			world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("Outlaw spawned"), false);
+	}
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
 			return;
 		if (world instanceof ServerLevel _level)
-			_level.getServer().getCommands().performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "", Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
+			_level.getServer().getCommands()
+					.performPrefixedCommand(new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, _level, 4, "",
+									Component.literal(""), _level.getServer(), null).withSuppressedOutput(),
 					"forceload add ~16 ~16 ~-16 ~-16");
-		if (Mth.nextInt(RandomSource.create(), 1, 2) == 1) {
-			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = PotatowarModEntities.POTATO_OUTLAW.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
-				if (entityToSpawn != null) {
-					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
-				}
-			}
-			if (!world.isClientSide() && world.getServer() != null)
-				world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("Outlaw spawned"), false);
-		} else {
-			if (world instanceof ServerLevel _level) {
-				Entity entityToSpawn = PotatowarModEntities.HUMAN_OUTLAW.get().spawn(_level, BlockPos.containing(x, y, z), MobSpawnType.MOB_SUMMONED);
-				if (entityToSpawn != null) {
-					entityToSpawn.setYRot(world.getRandom().nextFloat() * 360F);
-				}
-			}
-			if (!world.isClientSide() && world.getServer() != null)
-				world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("Outlaw spawned"), false);
-		}
+
+		if (Mth.nextInt(RandomSource.create(), 1, 2) == 1)
+			spawnEntity(world, x,y,z,PotatowarModEntities.POTATO_OUTLAW.get());
+		else
+			spawnEntity(world, x,y,z,PotatowarModEntities.HUMAN_OUTLAW.get());
+
 
 
 		final Vec3 _center = new Vec3(x, y, z);

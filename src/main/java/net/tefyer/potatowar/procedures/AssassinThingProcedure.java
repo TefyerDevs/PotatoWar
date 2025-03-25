@@ -5,30 +5,23 @@ import net.minecraft.util.Mth;
 
 public class AssassinThingProcedure {
 	public static String execute() {
-		double RandomNumber = 0;
-		String thing = "";
-		RandomNumber = Mth.nextInt(RandomSource.create(), 1, 10);
-		if (RandomNumber == 1) {
-			thing = "stole my socks";
-		} else if (RandomNumber == 2) {
-			thing = "robbed me the other day";
-		} else if (RandomNumber == 3) {
-			thing = "attacked another village";
-		} else if (RandomNumber == 4) {
-			thing = "burned someones house";
-		} else if (RandomNumber == 5) {
-			thing = "killed a town guard";
-		} else if (RandomNumber == 6) {
-			thing = "burned a rival's hideout";
-		} else if (RandomNumber == 7) {
-			thing = "betrayed a former ally";
-		} else if (RandomNumber == 8) {
-			thing = "stole a sacred relic";
-		} else if (RandomNumber == 9) {
-			thing = "disrupted a trade route";
-		} else if (RandomNumber == 10) {
-			thing = "released dangerous creatures";
+
+		String whatDidTheAssainDo = "NULL_1";
+		int RandomNumber = Mth.nextInt(RandomSource.create(), 1, 10);
+
+		switch (RandomNumber){
+			case 1:whatDidTheAssainDo = "stole my socks";
+			case 2:whatDidTheAssainDo = "robbed me the other day";
+			case 3:whatDidTheAssainDo = "attacked another village";
+			case 4:whatDidTheAssainDo = "burned someones house";
+			case 5:whatDidTheAssainDo = "killed a town guard";
+			case 6:whatDidTheAssainDo = "burned a rival's hideout";
+			case 7:whatDidTheAssainDo = "betrayed a former ally";
+			case 8:whatDidTheAssainDo = "stole a sacred relic";
+			case 9:whatDidTheAssainDo = "disrupted a trade route";
+			case 10:whatDidTheAssainDo = "released dangerous creatures";
+			default:whatDidTheAssainDo = "NULL_2";
 		}
-		return thing;
+		return whatDidTheAssainDo;
 	}
 }

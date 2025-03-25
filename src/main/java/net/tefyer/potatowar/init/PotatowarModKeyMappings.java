@@ -28,7 +28,8 @@ public class PotatowarModKeyMappings {
 			super.setDown(isDown);
 			if (isDownOld != isDown && isDown) {
 				PotatowarMod.PACKET_HANDLER.sendToServer(new CurrentQuestKeyMessage(0, 0));
-				CurrentQuestKeyMessage.pressAction(Minecraft.getInstance().player, 0, 0);
+                assert Minecraft.getInstance().player != null;
+                CurrentQuestKeyMessage.pressAction(Minecraft.getInstance().player, 0, 0);
 			}
 			isDownOld = isDown;
 		}
