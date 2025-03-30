@@ -1,9 +1,0 @@
-{
-  "name": "The Potato Book",
-  "landing_text": "Welcome to PotatoWar.",
-  "version": 1,
-  "creative_tab": "minecraft:tools_and_utilities",
-  "use_resource_pack": true,
-  "book_texture": "potatowar:textures/gui/patchouli_book_texture.png",
-  "model": "potatowar:patchouli_book_texture"
-}
