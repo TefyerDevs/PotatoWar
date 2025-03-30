@@ -1,6 +1,8 @@
 package net.tefyer.potatowar.multiblock;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 
@@ -21,6 +23,6 @@ public interface IMultiblock {
     public boolean replaceBlocks(LevelAccessor world, int x, int y, int z);
 
     // adds the offset position and the block type to a list.
-    <T extends Block> boolean addBlockData(BlockPos pos, T block);
-    <T extends Block> boolean addBlockData(int x, int y, int z, T block);
+    <T extends Block> boolean addBlockData(Level level, BlockPos pos, T block);
+    <T extends Block> boolean addBlockData(Level level,int x, int y, int z, T block);
 }

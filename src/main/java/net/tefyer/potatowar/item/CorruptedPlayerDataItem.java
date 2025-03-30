@@ -1,6 +1,7 @@
 
 package net.tefyer.potatowar.item;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -31,7 +32,7 @@ public class CorruptedPlayerDataItem extends Item implements IMultiBlockedItem {
 	public CorruptedPlayerDataItem() {
 		super(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
 
-		addMultiBlockData();
+		addMultiBlockData(Minecraft.getInstance().level);
 	}
 
 
@@ -64,28 +65,28 @@ public class CorruptedPlayerDataItem extends Item implements IMultiBlockedItem {
 	}
 
 	@Override
-	public void addMultiBlockData() {
-		multiblock.addBlockData(0,0,0, Blocks.FIRE);
+	public void addMultiBlockData(Level level) {
+		multiblock.addBlockData(level, 0,0,0, Blocks.FIRE);
 
 
-		multiblock.addBlockData(0,-1,0, Blocks.NETHERRACK);
-		multiblock.addBlockData(0,-2,0, Blocks.NETHERRACK);
+		multiblock.addBlockData(level, 0,-1,0, Blocks.NETHERRACK);
+		multiblock.addBlockData(level, 0,-2,0, Blocks.NETHERRACK);
 
 
-		multiblock.addBlockData(-1,-1,0, Blocks.REDSTONE_TORCH);
-		multiblock.addBlockData(1,-1,0, Blocks.REDSTONE_TORCH);
-		multiblock.addBlockData(0,-1,-1, Blocks.REDSTONE_TORCH);
-		multiblock.addBlockData(0,-1,1, Blocks.REDSTONE_TORCH);
+		multiblock.addBlockData(level, -1,-1,0, Blocks.REDSTONE_TORCH);
+		multiblock.addBlockData(level, 1,-1,0, Blocks.REDSTONE_TORCH);
+		multiblock.addBlockData(level, 0,-1,-1, Blocks.REDSTONE_TORCH);
+		multiblock.addBlockData(level, 0,-1,1, Blocks.REDSTONE_TORCH);
 
 
-		multiblock.addBlockData(-1,-2,1, Blocks.GOLD_BLOCK);
-		multiblock.addBlockData(-1,-2,0, Blocks.GOLD_BLOCK);
-		multiblock.addBlockData(-1,-2,-1, Blocks.GOLD_BLOCK);
-		multiblock.addBlockData(1,-2,1, Blocks.GOLD_BLOCK);
-		multiblock.addBlockData(1,-2,0, Blocks.GOLD_BLOCK);
-		multiblock.addBlockData(1,-2,-1, Blocks.GOLD_BLOCK);
-		multiblock.addBlockData(0,-2,1, Blocks.GOLD_BLOCK);
-		multiblock.addBlockData(0,-2,-1, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(level, -1,-2,1, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(level, -1,-2,0, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(level, -1,-2,-1, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(level, 1,-2,1, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(level, 1,-2,0, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(level, 1,-2,-1, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(level, 0,-2,1, Blocks.GOLD_BLOCK);
+		multiblock.addBlockData(level, 0,-2,-1, Blocks.GOLD_BLOCK);
 	}
 
 

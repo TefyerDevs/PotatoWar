@@ -3,7 +3,9 @@
   "clickedVisualize": false,
   "bookData": {
     "potatowar:potatowar": {
-      "viewedEntries": [],
+      "viewedEntries": [
+        "potatowar:potatowar/part_1"
+      ],
       "bookmarks": [],
       "completedManualQuests": []
     }
