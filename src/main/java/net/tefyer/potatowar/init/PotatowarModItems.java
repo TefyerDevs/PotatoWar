@@ -5,18 +5,15 @@
 package net.tefyer.potatowar.init;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.*;
 import net.tefyer.potatowar.deferredregister.ItemDeferredRegister;
 import net.tefyer.potatowar.item.*;
-import net.minecraft.world.item.Rarity;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.BlockItem;
 
 import net.tefyer.potatowar.PotatowarMod;
 
@@ -74,6 +71,7 @@ public class PotatowarModItems {
 	public static final RegistryObject<Item> TOPAZ = REGISTRY.register("topaz", () -> new NormalItem.Builder().setRarity(Rarity.COMMON).setItemId("black_jade").build());
 
 	public static final RegistryObject<Item> FORGOTTEN_WORLDS = REGISTRY.register("forgotten_worlds", () -> new ForgottenWorldsItem());
+	public static final RegistryObject<Item> POTATO_SWORD = REGISTRY.register("potato_sword", () -> new PotatoSwordItem(Tiers.DIAMOND, 15,-2.4F,new Item.Properties()));
 	public static final RegistryObject<Item> DIGITAL_WORLD = REGISTRY.register("digital_world", () -> new DigitalWorldItem());
 	public static final RegistryObject<Item> GREAT_STICK_OF_TESTING = REGISTRY.register("great_stick_of_testing", () -> new GreatStickOfTestingItem());
 	public static final RegistryObject<Item> MILITARY_ARMOR_HELMET = REGISTRY.register("military_armor_helmet", () -> new MilitaryArmorItem.Helmet());
