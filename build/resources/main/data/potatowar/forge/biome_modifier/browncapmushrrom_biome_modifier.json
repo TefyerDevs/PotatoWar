@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "potatowar:mushroomforest",
-  "features": "potatowar:browncapmushrrom",
-  "step": "vegetal_decoration"
-}
