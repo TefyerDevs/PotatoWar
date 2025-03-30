@@ -1,5 +1,6 @@
 
-/build
-/.idea
-/run-data
-/run
+/run-data/
+/run/
+/build/
+/.idea/
+/.gradle/
