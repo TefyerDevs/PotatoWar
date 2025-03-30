@@ -16,7 +16,41 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Entity;
 
-import net.tefyer.potatowar.entity.*;
+import net.tefyer.potatowar.entity.UnknownEntity;
+import net.tefyer.potatowar.entity.TownCenterMobEntity;
+import net.tefyer.potatowar.entity.ScoutLeaderEntity;
+import net.tefyer.potatowar.entity.RemnantEntity;
+import net.tefyer.potatowar.entity.Remnant6Entity;
+import net.tefyer.potatowar.entity.Remnant5Entity;
+import net.tefyer.potatowar.entity.Remnant4Entity;
+import net.tefyer.potatowar.entity.Remnant3Entity;
+import net.tefyer.potatowar.entity.Remnant2Entity;
+import net.tefyer.potatowar.entity.RaidLeaderEntity;
+import net.tefyer.potatowar.entity.Prototype1Entity;
+import net.tefyer.potatowar.entity.ProtoDefenderEntity;
+import net.tefyer.potatowar.entity.PotatoScoutEntity;
+import net.tefyer.potatowar.entity.PotatoOutlawEntity;
+import net.tefyer.potatowar.entity.PotatoMilitaryEntity;
+import net.tefyer.potatowar.entity.PotatoMilitaEntity;
+import net.tefyer.potatowar.entity.PotatoManEntity;
+import net.tefyer.potatowar.entity.PotatoKnightEntity;
+import net.tefyer.potatowar.entity.PotatoArcherEntity;
+import net.tefyer.potatowar.entity.MilitaryTrainerEntity;
+import net.tefyer.potatowar.entity.LostHazzyEntity;
+import net.tefyer.potatowar.entity.HumanScoutEntity;
+import net.tefyer.potatowar.entity.HumanOutlawEntity;
+import net.tefyer.potatowar.entity.HumanMilitaryEntity;
+import net.tefyer.potatowar.entity.HumanMilitaEntity;
+import net.tefyer.potatowar.entity.HumanKnightEntity;
+import net.tefyer.potatowar.entity.HumanEntity;
+import net.tefyer.potatowar.entity.HazzycloneEntity;
+import net.tefyer.potatowar.entity.GlitchEntity;
+import net.tefyer.potatowar.entity.FriedPotatoManEntity;
+import net.tefyer.potatowar.entity.FlyingTeddyEntity;
+import net.tefyer.potatowar.entity.FishEntity;
+import net.tefyer.potatowar.entity.CorruptedplayerEntity;
+import net.tefyer.potatowar.entity.BeserkerEntity;
+import net.tefyer.potatowar.entity.ArmyGeneralEntity;
 import net.tefyer.potatowar.PotatowarMod;
 
 import java.util.ArrayList;
@@ -30,50 +64,44 @@ public class PotatowarModEntities {
 
 	public static final RegistryObject<EntityType<PotatoManEntity>> POTATO_MAN = register("potato_man",
 			EntityType.Builder.<PotatoManEntity>of(PotatoManEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(PotatoManEntity::new)
-					.sized(0.6f, 1.8f));
 
-	public static final RegistryObject<EntityType<WildPotatomanEntity>> WILD_POTATO_MAN = register("wild_potato_man",
-			EntityType.Builder.<WildPotatomanEntity>of(WildPotatomanEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(WildPotatomanEntity::new)
-					.sized(0.6f, 1.8f));
-
+                    .sized(0.6f, 1.8f));
 	public static final RegistryObject<EntityType<HumanEntity>> HUMAN = register("human",
 			EntityType.Builder.<HumanEntity>of(HumanEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(HumanEntity::new)
-					.sized(0.6f, 1.8f));
 
+                    .sized(0.6f, 1.8f));
 	public static final RegistryObject<EntityType<Prototype1Entity>> PROTOTYPE_1 = register("prototype_1",
 			EntityType.Builder.<Prototype1Entity>of(Prototype1Entity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(Prototype1Entity::new)
-					.sized(0.6f, 1.8f));
 
+                    .sized(0.6f, 1.8f));
 	public static final RegistryObject<EntityType<PotatoMilitaEntity>> POTATO_MILITA = register("potato_milita",
 			EntityType.Builder.<PotatoMilitaEntity>of(PotatoMilitaEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(PotatoMilitaEntity::new)
-					.sized(0.6f, 1.8f));
 
+                    .sized(0.6f, 1.8f));
 	public static final RegistryObject<EntityType<HumanMilitaEntity>> HUMAN_MILITA = register("human_milita",
 			EntityType.Builder.<HumanMilitaEntity>of(HumanMilitaEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(HumanMilitaEntity::new)
-					.sized(0.6f, 1.8f));
 
+                    .sized(0.6f, 1.8f));
 	public static final RegistryObject<EntityType<ProtoDefenderEntity>> PROTO_DEFENDER = register("proto_defender",
 			EntityType.Builder.<ProtoDefenderEntity>of(ProtoDefenderEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(ProtoDefenderEntity::new)
-					.sized(0.6f, 1.8f));
 
+                    .sized(0.6f, 1.8f));
 	public static final RegistryObject<EntityType<UnknownEntity>> UNKNOWN = register("unknown",
 			EntityType.Builder.<UnknownEntity>of(UnknownEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(UnknownEntity::new).fireImmune().sized(0.6f, 1.8f));
-
 	public static final RegistryObject<EntityType<LostHazzyEntity>> LOST_HAZZY = register("lost_hazzy",
 			EntityType.Builder.<LostHazzyEntity>of(LostHazzyEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(LostHazzyEntity::new)
-					.sized(0.6f, 1.8f));
 
+                    .sized(0.6f, 1.8f));
 	public static final RegistryObject<EntityType<HazzycloneEntity>> HAZZYCLONE = register("hazzyclone",
 			EntityType.Builder.<HazzycloneEntity>of(HazzycloneEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(HazzycloneEntity::new)
-					.sized(0.6f, 1.8f));
 
+                    .sized(0.6f, 1.8f));
 	public static final RegistryObject<EntityType<FishEntity>> FISH = register("fish",
 			EntityType.Builder.<FishEntity>of(FishEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(FishEntity::new).fireImmune().sized(0.6f, 1.8f));
-
 	public static final RegistryObject<EntityType<CorruptedplayerEntity>> CORRUPTEDPLAYER = register("corruptedplayer",
 			EntityType.Builder.<CorruptedplayerEntity>of(CorruptedplayerEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(CorruptedplayerEntity::new)
-					.sized(0.6f, 1.8f));
 
+                    .sized(0.6f, 1.8f));
 	public static final RegistryObject<EntityType<HumanMilitaryEntity>> HUMAN_MILITARY = register("human_military",
 			EntityType.Builder.<HumanMilitaryEntity>of(HumanMilitaryEntity::new, MobCategory.MONSTER).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(HumanMilitaryEntity::new)
 
@@ -178,7 +206,6 @@ public class PotatowarModEntities {
 	public static void init(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			PotatoManEntity.init();
-			WildPotatomanEntity.init();
 			HumanEntity.init();
 			Prototype1Entity.init();
 			PotatoMilitaEntity.init();
@@ -218,7 +245,6 @@ public class PotatowarModEntities {
 	@SubscribeEvent
 	public static void registerAttributes(EntityAttributeCreationEvent event) {
 		event.put(POTATO_MAN.get(), PotatoManEntity.createAttributes().build());
-		event.put(WILD_POTATO_MAN.get(), WildPotatomanEntity.createAttributes().build());
 		event.put(HUMAN.get(), HumanEntity.createAttributes().build());
 		event.put(PROTOTYPE_1.get(), Prototype1Entity.createAttributes().build());
 		event.put(POTATO_MILITA.get(), PotatoMilitaEntity.createAttributes().build());

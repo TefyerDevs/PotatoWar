@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "potatowar:block/log_building_top",
-    "side": "potatowar:block/log_building"
-  }
-}

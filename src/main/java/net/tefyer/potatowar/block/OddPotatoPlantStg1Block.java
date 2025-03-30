@@ -86,4 +86,25 @@ public class OddPotatoPlantStg1Block extends FlowerBlock implements Bonemealable
 		OddPotatoPlantStg1OnBoneMealSuccessProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
+    public static class ModFlammableRotatedPillarBlock extends RotatedPillarBlock {
+        public ModFlammableRotatedPillarBlock() {
+            super(Properties.copy(Blocks.OAK_LOG));
+        }
+
+        @Override
+        public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+            return true;
+        }
+
+        @Override
+        public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+            return 5;
+        }
+
+        @Override
+        public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+            return 5;
+        }
+
+    }
 }
