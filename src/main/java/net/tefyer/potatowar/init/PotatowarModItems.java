@@ -70,11 +70,11 @@ public class PotatowarModItems {
 	public static final RegistryObject<Item> RUBY = REGISTRY.register("ruby", () -> new NormalItem.Builder().setRarity(Rarity.COMMON).setItemId("blood_ruby").build());
 	public static final RegistryObject<Item> TOPAZ = REGISTRY.register("topaz", () -> new NormalItem.Builder().setRarity(Rarity.COMMON).setItemId("black_jade").build());
 
-	public static final RegistryObject<Item> FORGOTTEN_WORLDS = REGISTRY.register("forgotten_worlds", () -> new ForgottenWorldsItem());
+	public static final RegistryObject<Item> FORGOTTEN_WORLDS = REGISTRY.register("forgotten_worlds", ForgottenWorldsItem::new);
 	public static final RegistryObject<Item> POTATO_SWORD = REGISTRY.register("potato_sword", () -> new PotatoSwordItem(Tiers.DIAMOND, 15,-2.4F,new Item.Properties()));
-	public static final RegistryObject<Item> DIGITAL_WORLD = REGISTRY.register("digital_world", () -> new DigitalWorldItem());
-	public static final RegistryObject<Item> GREAT_STICK_OF_TESTING = REGISTRY.register("great_stick_of_testing", () -> new GreatStickOfTestingItem());
-	public static final RegistryObject<Item> MILITARY_ARMOR_HELMET = REGISTRY.register("military_armor_helmet", () -> new MilitaryArmorItem.Helmet());
+	public static final RegistryObject<Item> DIGITAL_WORLD = REGISTRY.register("digital_world", DigitalWorldItem::new);
+	public static final RegistryObject<Item> GREAT_STICK_OF_TESTING = REGISTRY.register("great_stick_of_testing", GreatStickOfTestingItem::new);
+	public static final RegistryObject<Item> MILITARY_ARMOR_HELMET = REGISTRY.register("military_armor_helmet", MilitaryArmorItem.Helmet::new);
 
 	public static final RegistryObject<Item> BLOCKRANDOMIZE = REGISTRY.register("blockrandomize", () -> new BlockrandomizeItem());
 	public static final RegistryObject<Item> TEDDY = REGISTRY.register("teddy", () -> new TeddyItem());

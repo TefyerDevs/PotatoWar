@@ -28,6 +28,7 @@ import net.tefyer.potatowar.client.renderer.PotatoOutlawRenderer;
 import net.tefyer.potatowar.client.renderer.PotatoMilitaryRenderer;
 import net.tefyer.potatowar.client.renderer.PotatoMilitaRenderer;
 import net.tefyer.potatowar.client.renderer.PotatoManRenderer;
+import net.tefyer.potatowar.client.renderer.WildPotatoManRenderer;
 import net.tefyer.potatowar.client.renderer.PotatoKnightRenderer;
 import net.tefyer.potatowar.client.renderer.PotatoArcherRenderer;
 import net.tefyer.potatowar.client.renderer.MilitaryTrainerRenderer;
@@ -51,6 +52,7 @@ public class PotatowarModEntityRenderers {
 	@SubscribeEvent
 	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(PotatowarModEntities.POTATO_MAN.get(), PotatoManRenderer::new);
+		event.registerEntityRenderer(PotatowarModEntities.WILD_POTATO_MAN.get(), WildPotatoManRenderer::new);
 		event.registerEntityRenderer(PotatowarModEntities.HUMAN.get(), HumanRenderer::new);
 		event.registerEntityRenderer(PotatowarModEntities.PROTOTYPE_1.get(), Prototype1Renderer::new);
 		event.registerEntityRenderer(PotatowarModEntities.POTATO_MILITA.get(), PotatoMilitaRenderer::new);

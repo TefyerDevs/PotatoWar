@@ -37,6 +37,7 @@ import net.tefyer.potatowar.procedures.TradeStartedProcedure;
 import net.tefyer.potatowar.procedures.SetItemsProcedure;
 import net.tefyer.potatowar.procedures.PotatoManOnEntityTickUpdateProcedure;
 import net.tefyer.potatowar.init.PotatowarModEntities;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -54,7 +55,7 @@ public class PotatoManEntity extends PathfinderMob {
 	}
 
 	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
+	public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 

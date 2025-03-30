@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.LivingEntity;
 
-import net.tefyer.potatowar.procedures.GreatStickOfTestingLivingEntityIsHitWithItemProcedure;
+import net.minecraft.world.level.Level;
 
 public class GreatStickOfTestingItem extends Item {
 	public GreatStickOfTestingItem() {
@@ -16,7 +16,8 @@ public class GreatStickOfTestingItem extends Item {
 	@Override
 	public boolean hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
 		boolean retval = super.hurtEnemy(itemstack, entity, sourceentity);
-		GreatStickOfTestingLivingEntityIsHitWithItemProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ());
+		if (entity.level().isClientSide())
+			entity.level().explode(null, entity.getX(), entity.getY(),entity.getZ(), 100, Level.ExplosionInteraction.TNT);
 		return retval;
 	}
 }

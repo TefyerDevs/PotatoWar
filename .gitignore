@@ -1,6 +1,5 @@
 
 /build
-/idea
-/models
+/.idea
 /run-data
 /run

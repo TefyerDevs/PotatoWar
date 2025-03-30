@@ -41,7 +41,7 @@ public class FollowCommanderProcedure {
 					|| entity.getZ() <= entity.getPersistentData().getDouble("potatowar:PositionZ") - 12 || entity.getZ() >= entity.getPersistentData().getDouble("potatowar:PositionZ") + 12) {
 				entity.getPersistentData().putBoolean("potatowar:outsidePosition", true);
 			}
-			if (entity.getPersistentData().getBoolean("potatowar:outsidePosition") == true) {
+			if (entity.getPersistentData().getBoolean("potatowar:outsidePosition")) {
 				if (entity instanceof Mob _entity)
 					_entity.getNavigation().moveTo((entity.getPersistentData().getDouble("potatowar:PositionX")), y, (entity.getPersistentData().getDouble("potatowar:PositionZ")), 1.2);
 			}
@@ -54,11 +54,11 @@ public class FollowCommanderProcedure {
 				&& !entity.getType().is(TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("potatowar:civilian")))) {
 			for (Entity entityiterator : new ArrayList<>(world.players())) {
 				if (entity.getPersistentData().getDouble("potatowar:LeaderID") == (entityiterator.getCapability(PotatowarModVariables.PLAYER_VARIABLES_CAPABILITY, null).orElse(new PotatowarModVariables.PlayerVariables())).LeaderID
-						&& (entity instanceof ServerPlayer || entity instanceof Player)) {
+						&& (entity instanceof Player)) {
 					if (entity.getX() >= entityiterator.getX() + 16 || entity.getX() <= entityiterator.getX() - 16 || entity.getZ() >= entityiterator.getZ() + 16 || entity.getZ() <= entityiterator.getZ() - 16) {
 						entity.getPersistentData().putBoolean("potatowar:OutsideLeaderRange", true);
 					}
-					if (entity.getPersistentData().getBoolean("potatowar:OutsideLeaderRange") == true) {
+					if (entity.getPersistentData().getBoolean("potatowar:OutsideLeaderRange")) {
 						if (entity instanceof Mob _entity)
 							_entity.getNavigation().moveTo((entityiterator.getX()), y, (entityiterator.getZ()), 1.2);
 					}
