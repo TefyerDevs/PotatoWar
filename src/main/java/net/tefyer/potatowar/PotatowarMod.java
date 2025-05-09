@@ -1,6 +1,5 @@
 package net.tefyer.potatowar;
 
-import net.tefyer.potatowar.init.*;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -35,31 +34,19 @@ public class PotatowarMod {
 	public PotatowarMod() {
 		MinecraftForge.EVENT_BUS.register(this);
 
-		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		PotatowarModSounds.REGISTRY.register(bus);
-		PotatowarModBlocks.REGISTRY.register(bus);
-        PotatowarModBlockEntities.REGISTRY.register(bus);
-
-		PotatowarModItems.REGISTRY.register(bus);
-		PotatowarModItems.registerBlocks();
-
-		PotatowarModEntities.REGISTRY.register(bus);
-
-		PotatowarModTabs.REGISTRY.register(bus);
-
-		PotatowarModMobEffects.REGISTRY.register(bus);
-
-		PotatowarModPaintings.REGISTRY.register(bus);
-
-		PotatowarModMenus.REGISTRY.register(bus);
+		
 
 	}
+
 
 	// Start of user code block mod methods
 	// End of user code block mod methods
 	private static final String PROTOCOL_VERSION = "1";
-	public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation(MODID, MODID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
+	public static final SimpleChannel PACKET_HANDLER =
+			NetworkRegistry.newSimpleChannel(new ResourceLocation(MODID, MODID), () ->
+					PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 	private static int messageID = 0;
 
 	public static <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, T> decoder, BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {

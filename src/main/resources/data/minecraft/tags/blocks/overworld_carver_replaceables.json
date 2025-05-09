@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "potatowar:digital_block",
-    "minecraft:stone",
-    "minecraft:dirt",
-    "minecraft:grass_block"
-  ]
-}
