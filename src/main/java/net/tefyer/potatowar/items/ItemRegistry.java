@@ -2,8 +2,8 @@ package net.tefyer.potatowar.items;
 
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.tefyer.potatowar.PotatowarMod;
-import net.tefyer.potatowar.api.deferredregister.ItemDeferredRegister;
-import net.tefyer.potatowar.api.item.kit.KitType;
+import net.tefyer.api.deferredregister.ItemDeferredRegister;
+import net.tefyer.api.item.kit.KitType;
 import net.tefyer.potatowar.items.custom.KitItem;
 
 public class ItemRegistry {

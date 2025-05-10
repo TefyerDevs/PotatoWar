@@ -1,8 +1,6 @@
-package net.tefyer.potatowar.api.deferredregister;
+package net.tefyer.api.deferredregister;
 
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -23,6 +21,6 @@ public class EntityDeferredRegister implements IDeferredRegister{
 
     @Override
     public void register(IEventBus modEventBus) {
-
+        ENTITY_TYPES.register(modEventBus);
     }
 }

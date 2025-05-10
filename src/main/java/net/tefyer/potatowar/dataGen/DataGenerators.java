@@ -10,14 +10,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.tefyer.potatowar.PotatowarMod;
 import net.tefyer.potatowar.dataGen.custom.ItemModelGenerator;
-import net.tefyer.potatowar.dataGen.custom.ModBlockLootTables;
 import net.tefyer.potatowar.dataGen.custom.ModBlockTagGenerator;
 import net.tefyer.potatowar.dataGen.custom.ModItemTagGenerator;
 
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = PotatowarMod.MODID, value = Dist.CLIENT , bus = Mod.EventBusSubscriber.Bus.MOD)
-public class DataGeneratorss {
+public class DataGenerators {
 
     @SubscribeEvent
     public static void genAllData(GatherDataEvent gatherDataEvent){
@@ -30,7 +29,7 @@ public class DataGeneratorss {
                 new ModBlockTagGenerator(packOutput,lookupProvider, existingFileHelper));
         generator.addProvider(gatherDataEvent.includeServer(), new ModItemTagGenerator(packOutput,lookupProvider,
                 blockTagGenerator.contentsGetter(),existingFileHelper));
-        
+
         generator.addProvider(gatherDataEvent.includeClient(),
                 new ItemModelGenerator(packOutput,existingFileHelper));
 

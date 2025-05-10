@@ -1,4 +1,4 @@
-package net.tefyer.potatowar.api.deferredregister;
+package net.tefyer.api.deferredregister;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;

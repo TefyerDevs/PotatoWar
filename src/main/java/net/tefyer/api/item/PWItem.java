@@ -1,4 +1,4 @@
-package net.tefyer.potatowar.api.item;
+package net.tefyer.api.item;
 
 import net.minecraft.world.item.Item;
 import net.tefyer.potatowar.items.custom.KitItem;

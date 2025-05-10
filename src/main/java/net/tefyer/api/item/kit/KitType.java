@@ -1,4 +1,4 @@
-package net.tefyer.potatowar.api.item.kit;
+package net.tefyer.api.item.kit;
 
 public enum KitType {
     BLANK(false),

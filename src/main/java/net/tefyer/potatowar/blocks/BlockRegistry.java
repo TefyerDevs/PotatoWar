@@ -2,7 +2,7 @@ package net.tefyer.potatowar.blocks;
 
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.tefyer.potatowar.PotatowarMod;
-import net.tefyer.potatowar.api.deferredregister.BlockDeferredRegister;
+import net.tefyer.api.deferredregister.BlockDeferredRegister;
 
 public class BlockRegistry {
     public static final BlockDeferredRegister BLOCKS = new BlockDeferredRegister(PotatowarMod.MODID);

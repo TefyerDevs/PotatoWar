@@ -2,8 +2,8 @@ package net.tefyer.potatowar.items.custom;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.tefyer.potatowar.api.item.kit.KitType;
-import net.tefyer.potatowar.api.item.PWItem;
+import net.tefyer.api.item.kit.KitType;
+import net.tefyer.api.item.PWItem;
 
 public class KitItem extends PWItem {
     KitType type;
