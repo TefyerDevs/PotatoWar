@@ -36,13 +36,13 @@ public class PotatowarMod {
 	public static final String MODID = "potatowar";
 
 	public PotatowarMod() {
-		MinecraftForge.EVENT_BUS.register(this);
-
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		ItemRegistry.registerItems(modEventBus);
 		BlockRegistry.registerBlocks(modEventBus);
 		EntityRegistry.registerEntities(modEventBus);
+
+		MinecraftForge.EVENT_BUS.register(this);
 
 	}
 

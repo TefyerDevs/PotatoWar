@@ -71,26 +71,22 @@ public class PotatoManEntity extends PathfinderMob {
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty,
                                         MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
         SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
-        finSpawn(world, this.getX(), this.getY(), this.getZ(), this);
+        EntityUtils.potatoManSetItems(world, this.getX(), this.getY(), this.getZ(), this);
         return retval;
     }
 
-    private void finSpawn(ServerLevelAccessor world, double x, double y, double z, PotatoManEntity potatoManEntity) {
-    }
 
 
     @Override
-    public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
-        ItemStack itemstack = sourceentity.getItemInHand(hand);
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
-        super.mobInteract(sourceentity, hand);
+        super.mobInteract(player, hand);
         double x = this.getX();
         double y = this.getY();
         double z = this.getZ();
-        Entity entity = this;
-        Level world = this.level();
 
-        //startTrade(world, x, y, z, entity, sourceentity);
+        EntityUtils.potatoManStartTrade(this.level(), x, y, z, this, player);
         return retval;
     }
 
