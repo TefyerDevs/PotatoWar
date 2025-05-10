@@ -12,4 +12,7 @@ public class KitItem extends PWItem {
         this.type = type;
     }
 
+    public KitType getType() {
+        return type;
+    }
 }

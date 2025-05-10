@@ -9,6 +9,8 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.tefyer.potatowar.PotatowarMod;
+import net.tefyer.potatowar.items.ItemRegistry;
+import net.tefyer.potatowar.items.custom.KitItem;
 import net.tefyer.potatowar.tags.ModTags;
 
 import java.util.Objects;
@@ -21,9 +23,12 @@ public class ItemModelGenerator extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        ForgeRegistries.ITEMS.tags().getTag(ModTags.Items.POTATO_KITS).forEach((item -> {
-            basicItemMultiTextureable(item, "blank_kit");
-        }));
+        ItemRegistry.ITEMS.KITS.forEach(item ->{
+            if(!((KitItem)item.get()).getType().isIfTag()){
+                basicItem(item.get()); return;
+            }
+            basicItemMultiTextureable(item.get(), "blank_kit");
+        });
     }
 
 

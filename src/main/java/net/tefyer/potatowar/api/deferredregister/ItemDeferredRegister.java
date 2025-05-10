@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class ItemDeferredRegister {
+public class ItemDeferredRegister implements IDeferredRegister{
     public final DeferredRegister<Item> ITEMS;
 
     public final List<RegistryObject<Item>> KITS = new ArrayList<>();
@@ -37,6 +37,7 @@ public class ItemDeferredRegister {
         return item;
     }
 
+    @Override
     public void register(IEventBus modEventBus){
         ITEMS.register(modEventBus);
     }

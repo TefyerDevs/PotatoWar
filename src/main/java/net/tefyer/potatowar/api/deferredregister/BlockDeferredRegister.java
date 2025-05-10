@@ -9,7 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-public class BlockDeferredRegister {
+public class BlockDeferredRegister implements IDeferredRegister {
     public final DeferredRegister<Item> ITEMS;
     public final DeferredRegister<Block> BlOCKS;
 
@@ -18,10 +18,11 @@ public class BlockDeferredRegister {
         BlOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, id);
     }
 
-    public <T extends Block>RegistryObject<T> registerBlock(String id, Supplier<T> block){
+    public <T extends Block>RegistryObject<T> register(String id, Supplier<T> block){
         return BlOCKS.register(id,block);
     }
 
+    @Override
     public void register(IEventBus modEventBus){
         ITEMS.register(modEventBus);
         BlOCKS.register(modEventBus);
