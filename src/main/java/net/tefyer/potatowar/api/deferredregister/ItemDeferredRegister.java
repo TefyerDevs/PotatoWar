@@ -1,4 +1,4 @@
-package net.tefyer.potatowar.deferredregister;
+package net.tefyer.potatowar.api.deferredregister;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;

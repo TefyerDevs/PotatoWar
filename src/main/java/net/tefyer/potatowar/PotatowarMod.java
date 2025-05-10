@@ -17,6 +17,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.FriendlyByteBuf;
 
+import net.tefyer.potatowar.items.ItemRegistry;
+import net.tefyer.potatowar.blocks.BlockRegistry;
+
 import java.util.function.Supplier;
 import java.util.function.Function;
 import java.util.function.BiConsumer;
@@ -36,7 +39,8 @@ public class PotatowarMod {
 
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		
+		ItemRegistry.registerItems(modEventBus);
+		BlockRegistry.registerBlocks(modEventBus);
 
 	}
 

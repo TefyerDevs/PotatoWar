@@ -49,7 +49,6 @@ repositories {
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
     }
-    maven { url 'https://maven.blamejared.com' }
     maven {
         name = 'GeckoLib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
