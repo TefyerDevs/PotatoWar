@@ -283,7 +283,7 @@ public class EntityUtils {
         putValue(player, CompoundTagIds.CurrentQuest, getDouble(entity,CompoundTagIds.CurrentQuest));
         putValue(player, CompoundTagIds.ItemType1, getDouble(entity,CompoundTagIds.ItemType1));
         putValue(player, CompoundTagIds.ItemType2, getDouble(entity,CompoundTagIds.ItemType2));
-        putValue(player, CompoundTagIds.ItemType2, getDouble(entity,"potatowar:ItemType3"));
+        putValue(player, CompoundTagIds.ItemType3, getDouble(entity,CompoundTagIds.ItemType3));
         putValue(player, CompoundTagIds.PlayerItemCount1, getDouble(entity,CompoundTagIds.ItemCount1));
         putValue(player, CompoundTagIds.PlayerItemCount2, getDouble(entity,CompoundTagIds.ItemCount2));
         putValue(player, CompoundTagIds.PlayerItemCount3, getDouble(entity,CompoundTagIds.ItemCount3));
