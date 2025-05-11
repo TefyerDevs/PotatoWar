@@ -1,5 +1,6 @@
 package net.tefyer.potatowar;
 
+import net.tefyer.potatowar.client.menus.MenuRegistry;
 import net.tefyer.potatowar.entity.EntityRegistry;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -41,6 +42,8 @@ public class PotatowarMod {
 		ItemRegistry.registerItems(modEventBus);
 		BlockRegistry.registerBlocks(modEventBus);
 		EntityRegistry.registerEntities(modEventBus);
+
+		MenuRegistry.registerMenus(modEventBus);
 
 		MinecraftForge.EVENT_BUS.register(this);
 
