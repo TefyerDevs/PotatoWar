@@ -19,10 +19,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import net.tefyer.api.entity.utils.EntityUtils;
 import net.tefyer.api.menus.messages.ItemQuestSlotMessage;
 import net.tefyer.potatowar.PotatowarMod;
 import net.tefyer.potatowar.client.menus.MenuRegistry;
 import net.tefyer.potatowar.client.menus.MenuUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -81,6 +83,8 @@ public class ItemQuestMenu extends AbstractContainerMenu implements Supplier<Map
                     });
             }
         }
+
+        // custom slots
         this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 7, 35) {
             private final int slot = 0;
             private int x = ItemQuestMenu.this.x;
@@ -95,6 +99,7 @@ public class ItemQuestMenu extends AbstractContainerMenu implements Supplier<Map
             public boolean mayPlace(ItemStack stack) {
                 return false;
             }
+
         }));
         this.customSlots.put(1, this.addSlot(new SlotItemHandler(internal, 1, 34, 35) {
             private final int slot = 1;
@@ -195,11 +200,13 @@ public class ItemQuestMenu extends AbstractContainerMenu implements Supplier<Map
                 return false;
             }
         }));
+
+        // vanilla slots
         for (int si = 0; si < 3; ++si)
             for (int sj = 0; sj < 9; ++sj)
-                this.addSlot(new Slot(inv, sj + (si + 1) * 9, 0 + 8 + sj * 18, 0 + 84 + si * 18));
+                this.addSlot(new Slot(inv, sj + (si + 1) * 9, 8 + sj * 18, 84 + si * 18));
         for (int si = 0; si < 9; ++si)
-            this.addSlot(new Slot(inv, si, 0 + 8 + si * 18, 0 + 142));
+            this.addSlot(new Slot(inv, si, 8 + si * 18, 142));
     }
 
 

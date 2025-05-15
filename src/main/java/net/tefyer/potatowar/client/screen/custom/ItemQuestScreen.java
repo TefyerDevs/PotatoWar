@@ -17,10 +17,11 @@ import java.util.HashMap;
 
 
 public class ItemQuestScreen extends AbstractContainerScreen<ItemQuestMenu> {
-        private final static HashMap<String, Object> guistate = ItemQuestScreen.guistate;
+        private final static HashMap<String, Object> guistate = ItemQuestMenu.guistate;
         private final Level world;
         private final int x, y, z;
         private final Player entity;
+        private static final ResourceLocation texture = new ResourceLocation("potatowar:textures/screens/itemquest.png");
         Button button_trade;
 
         public ItemQuestScreen(ItemQuestMenu container, Inventory inventory, Component text) {
@@ -33,9 +34,6 @@ public class ItemQuestScreen extends AbstractContainerScreen<ItemQuestMenu> {
             this.imageWidth = 176;
             this.imageHeight = 166;
         }
-
-        private static final ResourceLocation texture = new ResourceLocation("potatowar:textures/screens/itemquest.png");
-
         @Override
         public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
             this.renderBackground(guiGraphics);
@@ -48,7 +46,8 @@ public class ItemQuestScreen extends AbstractContainerScreen<ItemQuestMenu> {
             RenderSystem.setShaderColor(1, 1, 1, 1);
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
-            guiGraphics.blit(texture, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+            guiGraphics.blit(texture, this.leftPos, this.topPos,
+                    0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
             RenderSystem.disableBlend();
         }
 
@@ -71,10 +70,8 @@ public class ItemQuestScreen extends AbstractContainerScreen<ItemQuestMenu> {
         public void init() {
             super.init();
             button_trade = Button.builder(Component.translatable("gui.potatowar.itemquest.button_trade"), e -> {
-                if (true) {
-                    PotatowarMod.PACKET_HANDLER.sendToServer(new ItemQuestButtonMessage(0, x, y, z));
-                    ItemQuestButtonMessage.handleButtonAction(entity, 0, x, y, z);
-                }
+                PotatowarMod.PACKET_HANDLER.sendToServer(new ItemQuestButtonMessage(0, x, y, z));
+                ItemQuestButtonMessage.handleButtonAction(entity, 0, x, y, z);
             }).bounds(this.leftPos + 105, this.topPos + 61, 51, 20).build();
             guistate.put("button:button_trade", button_trade);
             this.addRenderableWidget(button_trade);

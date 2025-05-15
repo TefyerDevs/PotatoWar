@@ -14,20 +14,27 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PlayMessages;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.tefyer.api.CompoundTagIds;
 import net.tefyer.api.entity.utils.EntityUtils;
+import net.tefyer.api.item.kit.KitType;
 import net.tefyer.potatowar.entity.EntityRegistry;
+import net.tefyer.potatowar.items.ChestMalitiaMarker;
+import net.tefyer.potatowar.items.custom.KitItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
 public class PotatoManEntity extends PathfinderMob {
+
+    public static KitType kitType;
 
     public PotatoManEntity(PlayMessages.SpawnEntity packet, Level world) {
         this(EntityRegistry.POTATO_MAN.get(), world);
@@ -86,31 +93,47 @@ public class PotatoManEntity extends PathfinderMob {
         double y = this.getY();
         double z = this.getZ();
 
+        if(kitType != KitType.BLANK){
+            performChange(itemstack);
+        }
+
+        if(itemstack.getItem() instanceof ChestMalitiaMarker markerItem &&
+                    kitType == KitType.MILITA){
+            // todo: make malitia work
+        }
+
         EntityUtils.potatoManStartTrade(this.level(), x, y, z, this, player);
         return retval;
     }
+
+    private void performChange(ItemStack stack) {
+        if(stack.getItem() instanceof KitItem item){
+           setKitType(item.getType());
+        }
+    }
+
 
 
     @Override
     public void baseTick() {
         super.baseTick();
-        if (EntityUtils.checkMinMaxEntityX(this,"HomeX",64,64) ||
-                EntityUtils.checkMinMaxEntityX(this,"HomeZ",64,64))
+        if (EntityUtils.checkMinMaxEntityX(this, CompoundTagIds.HomeX,64,64) ||
+                EntityUtils.checkMinMaxEntityX(this,CompoundTagIds.HomeZ,64,64))
             this.getPersistentData().putBoolean("potatowar:OutsideTownPosition", true);
 
         if (this.getPersistentData().getBoolean("potatowar:outsidePosition"))
-            this.getNavigation().moveTo((this.getPersistentData().getDouble("HomeX")), getY(),
-                        (this.getPersistentData().getDouble("HomeZ")), 1.2);
+            this.getNavigation().moveTo((this.getPersistentData().getDouble(CompoundTagIds.HomeX)), getY(),
+                        (this.getPersistentData().getDouble(CompoundTagIds.HomeZ)), 1.2);
 
-        if (EntityUtils.checkMinMaxEntityX(this,"HomeX",8,8) ||
-                EntityUtils.checkMinMaxEntityZ(this,"HomeZ",8,8))
+        if (EntityUtils.checkMinMaxEntityX(this,CompoundTagIds.HomeX,8,8) ||
+                EntityUtils.checkMinMaxEntityZ(this,CompoundTagIds.HomeZ,8,8))
             this.getPersistentData().putBoolean("potatowar:OutsideTownPosition", false);
 
         for (Entity entityiterator : new ArrayList<>(this.level().players())) {
             if ((this.getPersistentData().getString("potatowar:QuestHolder"))
                     .equals(ForgeRegistries.ENTITY_TYPES.getKey(entityiterator.getType()).toString())) {
-                if (!(entityiterator.getPersistentData().getDouble("potatowar:CivilianID") ==
-                        this.getPersistentData().getDouble("potatowar:CivilianID"))) {
+                if (!(entityiterator.getPersistentData().getDouble(CompoundTagIds.CivilianID) ==
+                        this.getPersistentData().getDouble(CompoundTagIds.CivilianID))) {
                     this.getPersistentData().putBoolean("potatowar:QuestTaken", false);
                 }
             }
@@ -149,4 +172,7 @@ public class PotatoManEntity extends PathfinderMob {
     }
 
 
+    public void setKitType(KitType type) {
+        kitType = type;
+    }
 }

@@ -54,14 +54,14 @@ public class ItemQuestSlotMessage {
                                Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context context = contextSupplier.get();
         context.enqueueWork(() -> {
-            Player entity = context.getSender();
+            Player player = context.getSender();
             int slotID = message.slotID;
             int changeType = message.changeType;
             int meta = message.meta;
             int x = message.x;
             int y = message.y;
             int z = message.z;
-            handleSlotAction(entity, slotID, changeType, meta, x, y, z);
+            handleSlotAction(player, slotID, changeType, meta, x, y, z);
         });
         context.setPacketHandled(true);
     }

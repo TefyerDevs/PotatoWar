@@ -33,4 +33,8 @@ public class CompoundTagIds {
     public static final String AssassinThing = PotatowarMod.MODID + ":AssassinThing";
     public static final String AssassinX = PotatowarMod.MODID + ":AssassinX";
     public static final String AssassinZ = PotatowarMod.MODID + ":AssassinZ";
+    public static final String HomeX = PotatowarMod.MODID + ":HomeX";
+    public static final String HomeZ = PotatowarMod.MODID + ":HomeZ";
+    public static final String ChestBind =  PotatowarMod.MODID + ":ChestBind";
+    public static final String TownCenter =  PotatowarMod.MODID + ":TownCenter";
 }

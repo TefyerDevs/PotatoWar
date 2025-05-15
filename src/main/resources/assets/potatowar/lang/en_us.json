@@ -25,7 +25,7 @@
   "item.potatowar.digital_world": "Digital World Portal Igniter",
   "gui.potatowar.confrim_abandon_quest.label_are_you_sure_you_want_to": "Are you sure you want to",
   "advancements.social_credit.descr": "Someone doesnt like you",
-  "item.potatowar.topaz": "Black Jade",
+  "item.potatowar.black_jade": "Black Jade",
   "subtitles.aria_math": "Forgotten Memories",
   "entity.potatowar.human_outlaw": "Human Outlaw",
   "advancements.potato_war.descr": "It has begun...",
@@ -189,5 +189,9 @@
   "lore.potatowar.milita_kit": "The Military's Finest worker.",
   "lore.potatowar.fryer_kit": "The Military's Finest worker.",
   "lore.potatowar.army_kit": "The Military's Finest worker.",
-  "lore.potatowar.knight_kit": "The Military's Finest worker."
+  "lore.potatowar.knight_kit": "The Military's Finest worker.",
+
+
+  "chat.potatowar.human_rep": "Human Reputation",
+  "chat.potatowar.potato_rep": "Potato Reputation"
 }

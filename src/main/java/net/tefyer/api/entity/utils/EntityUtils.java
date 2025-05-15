@@ -12,14 +12,23 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.network.NetworkHooks;
 import net.tefyer.api.CompoundTagIds;
 import net.tefyer.potatowar.client.menus.MenuRegistry;
 import net.tefyer.potatowar.client.menus.custom.ItemQuestMenu;
 import net.tefyer.potatowar.entity.custom.PotatoManEntity;
+import net.tefyer.potatowar.items.ItemRegistry;
 import net.tefyer.potatowar.tags.ModTags;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class EntityUtils {
     public static final <T extends Entity> boolean checkMinMaxEntityX(T entity, String id, int max, int min){
@@ -266,6 +275,7 @@ public class EntityUtils {
             putValue(entity,CompoundTagIds.RandomizeQuest, false);
             potatoManSetItems(world, x, y, z, entity);
         }
+
         if(checkIfReputationGreaterThanEquals(player, 0) &&
                 player.getMainHandItem().is(ModTags.Items.POTATO_KITS) &&
                 getBoolean(player,CompoundTagIds.AssassinQuest)){ // if the trade is done
@@ -367,4 +377,195 @@ public class EntityUtils {
         return player.getCapability(GlobalVariableRegistry.PLAYER_VARIABLES_CAPABILITY,null)
                 .orElse(new GlobalVariableRegistry.PlayerVariables()).PotatoReputation >= i;
     }
+
+    public static double getPotatoReputation(Player player) {
+        return player.getCapability(GlobalVariableRegistry.PLAYER_VARIABLES_CAPABILITY,null)
+                .orElse(new GlobalVariableRegistry.PlayerVariables()).PotatoReputation;
+    }
+    public static double getHumanReputation(Player player) {
+        return player.getCapability(GlobalVariableRegistry.PLAYER_VARIABLES_CAPABILITY,null)
+                .orElse(new GlobalVariableRegistry.PlayerVariables()).HumanReputation;
+    }
+
+    public static void generateQuest(Player player){
+        ItemStack item1 = ItemStack.EMPTY;
+        ItemStack Item2 = ItemStack.EMPTY;
+        ItemStack Item3 = ItemStack.EMPTY;
+        ItemStack Reward1 = ItemStack.EMPTY;
+        ItemStack Reward2 = ItemStack.EMPTY;
+
+        if(getDouble(player,CompoundTagIds.CurrentFactionID) == 1)
+            Reward1 = new ItemStack(ItemRegistry.RUBY.get()).copy();
+        else if(getDouble(player,CompoundTagIds.CurrentFactionID) == 2)
+            Reward1 = new ItemStack(ItemRegistry.BLACK_JADE.get()).copy();
+
+        if(checkForGenQuestWithNum(player,1)){
+            item1 = getItem1(player);
+            Item2 = getItem2(player);
+            Item3 = getItem3(player);
+            Reward2 = getItem4(player);
+
+            if (player.containerMenu instanceof Supplier _current && _current.get() instanceof Map _slots) {
+                setItems(player,_slots,item1,Item2,Item3,Reward1,Reward2);
+                checkifSlotsLocked(player,_slots,item1,Item2,Item3,Reward1,Reward2);
+            }
+        }
+        else if(checkForGenQuestWithNum(player,2)){
+            item1 = getItem4(player);
+            Item2 = getItem1(player);
+            Item3 = getItem2(player);
+            Reward2 = getItem3(player);
+
+            if (player.containerMenu instanceof Supplier _current && _current.get() instanceof Map _slots) {
+                setItems(player,_slots,item1,Item2,Item3,Reward1,Reward2);
+                checkifSlotsLocked(player,_slots,item1,Item2,Item3,Reward1,Reward2);
+            }
+        }
+        else if(checkForGenQuestWithNum(player,3)){
+            item1 = getItem3(player);
+            Item2 = getItem4(player);
+            Item3 = getItem1(player);
+            Reward2 = getItem2(player);
+
+            if (player.containerMenu instanceof Supplier _current && _current.get() instanceof Map _slots) {
+                setItems(player,_slots,item1,Item2,Item3,Reward1,Reward2);
+                checkifSlotsLocked(player,_slots,item1,Item2,Item3,Reward1,Reward2);
+            }
+        }
+        else if(checkForGenQuestWithNum(player,4)){
+            item1 = getItem2(player);
+            Item2 = getItem3(player);
+            Item3 = getItem4(player);
+            Reward2 = getItem1(player);
+
+            if (player.containerMenu instanceof Supplier _current && _current.get() instanceof Map _slots) {
+                setItems(player,_slots,item1,Item2,Item3,Reward1,Reward2);
+                checkifSlotsLocked(player,_slots,item1,Item2,Item3,Reward1,Reward2);
+            }
+        }
+
+    }
+
+    private static void checkifSlotsLocked(Player player, Map slots, ItemStack item1, ItemStack item2,
+                                           ItemStack item3, ItemStack reward1, ItemStack reward2) {
+        if(checkSlots(slots,item1,item2,item3) && checkSlotsAmmount(slots,item1,item2,item3)){
+            putValue(player, CompoundTagIds.SlotsLocked,false);
+        }
+    }
+
+    private static boolean checkSlotsAmmount(Map slots, ItemStack item1, ItemStack item2, ItemStack item3) {
+        return  ((Slot) slots.get(3)).getItem().getCount() == item1.getCount() &&
+                ((Slot) slots.get(4)).getItem().getCount() == item2.getCount() &&
+                ((Slot) slots.get(5)).getItem().getCount() == item3.getCount();
+    }
+
+    private static boolean checkSlots(Map slots, ItemStack item1, ItemStack item2, ItemStack item3) {
+        return ((Slot) slots.get(3)).getItem().getItem() == item1.getItem() &&
+                ((Slot) slots.get(4)).getItem().getItem() == item2.getItem() &&
+                ((Slot) slots.get(5)).getItem().getItem() == item3.getItem();
+    }
+
+    private static void setItems(Player player,Map _slots,ItemStack item1, ItemStack item2,
+                                 ItemStack item3, ItemStack reward1, ItemStack reward2) {
+
+        setSlot(player, _slots, item1,0,CompoundTagIds.PlayerItemCount1);
+        setSlot(player, _slots, item2,1,CompoundTagIds.PlayerItemCount2);
+        setSlot(player, _slots, item3,2,CompoundTagIds.PlayerItemCount3);
+        setSlot(player, _slots, reward1,6,CompoundTagIds.PlayerRewardCount1);
+        setSlot(player, _slots, reward2,7,CompoundTagIds.PlayerRewardCount2);
+    }
+
+    private static void setSlot(Player player, Map slots, ItemStack stack, int i, String playerRewardCount2) {
+        ItemStack _stack = stack.copy();
+        _stack.setCount((int) player.getPersistentData().getDouble(playerRewardCount2));
+        ((Slot) slots.get(i)).set(_stack);
+        player.containerMenu.broadcastChanges();
+    }
+
+    private static boolean checkForGenQuestWithNum(Player player, int i){
+        return getBoolean(player,CompoundTagIds.HasQuest) && getDouble(player, CompoundTagIds.CurrentQuest) == i
+                && player.containerMenu instanceof ItemQuestMenu;
+    }
+
+
+    public static ItemStack getItem1(Player player) {
+        if (player == null)
+            return ItemStack.EMPTY;
+
+        if (getDouble(player,"potatoWar:ItemType1") >= 4) {
+            return new ItemStack(Blocks.OAK_LOG);
+        }
+        if (getDouble(player,"potatoWar:ItemType1") >= 3) {
+            return new ItemStack(Blocks.COBBLESTONE);
+        }
+        if (getDouble(player,"potatoWar:ItemType1") >= 2) {
+            return new ItemStack(Blocks.OAK_PLANKS);
+        }
+        if (getDouble(player,"potatoWar:ItemType1") >= 1) {
+            return new ItemStack(Blocks.SANDSTONE);
+        }
+        return new ItemStack(Blocks.DIRT);
+    }
+
+    public static ItemStack getItem2(Player player) {
+        if (player == null)
+            return ItemStack.EMPTY;
+
+        if (getDouble(player,"potatoWar:ItemType1") >= 5) {
+            return new ItemStack(Items.WHEAT_SEEDS).copy();
+        }
+        if (getDouble(player,"potatoWar:ItemType1") >= 4) {
+            return new ItemStack(Blocks.OAK_SAPLING).copy();
+        }
+        if (getDouble(player,"potatoWar:ItemType1") >= 3) {
+            return new ItemStack(Blocks.POPPY).copy();
+        }
+        if (getDouble(player,"potatoWar:ItemType1") >= 2) {
+            return new ItemStack(Blocks.DANDELION).copy();
+        }
+        if (getDouble(player,"potatoWar:ItemType1") >= 1) {
+            return new ItemStack(Blocks.SUGAR_CANE).copy();
+        }
+        return new ItemStack(Blocks.DIRT);
+    }
+
+    public static ItemStack getItem3(Player player) {
+        if (player == null)
+            return ItemStack.EMPTY;
+
+        if (getDouble(player,"potatoWar:ItemType1") >= 4)
+            return new ItemStack(Items.STONE_SHOVEL).copy();
+
+        if (getDouble(player,"potatoWar:ItemType1") >= 3)
+            return new ItemStack(Items.STONE_PICKAXE).copy();
+
+        if (getDouble(player,"potatoWar:ItemType1") >= 2)
+            return new ItemStack(Items.STONE_AXE).copy();
+
+        if (getDouble(player,"potatoWar:ItemType1") >= 1)
+            return new ItemStack(Items.STONE_HOE).copy();
+
+
+        return new ItemStack(Blocks.DIRT);
+    }
+
+    public static ItemStack getItem4(Player player) {
+        if (player == null)
+            return ItemStack.EMPTY;
+
+        if (getDouble(player,"potatoWar:ItemType1") >= 4)
+            return new ItemStack(Blocks.COPPER_BLOCK).copy();
+
+        if (getDouble(player,"potatoWar:ItemType1") >= 3)
+            return new ItemStack(Blocks.BRICKS).copy();
+
+        if (getDouble(player,"potatoWar:ItemType1") >= 2)
+            return new ItemStack(Blocks.TUFF).copy();
+
+        if (getDouble(player,"potatoWar:ItemType1") >= 1)
+            return new ItemStack(Blocks.CALCITE).copy();
+
+        return new ItemStack(Blocks.DIRT);
+    }
+
 }
